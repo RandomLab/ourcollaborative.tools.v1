@@ -1,0 +1,68 @@
+/* Petit Frere Narrow */
+
+@font-face {
+    font-family: "Petit Frere Narrow";
+    src: url("../assets/fonts/PetitFrere/PetitFrereNarrow-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Petit Frere Narrow";
+    src: url("../assets/fonts/PetitFrere/PetitFrereNarrow-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Petit Frere Narrow";
+    src: url("../assets/fonts/PetitFrere/PetitFrereNarrow-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Petit Frere Wide */
+
+@font-face {
+    font-family: "Petit Frere Wide";
+    src: url("../assets/fonts/PetitFrere/PetitFrereWide-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Petit Frere Wide";
+    src: url("../assets/fonts/PetitFrere/PetitFrereWide-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Petit Frere Wide";
+    src: url("../assets/fonts/PetitFrere/PetitFrereWide-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Ready Active */
+
+@font-face {
+    font-family: "Ready Active";
+    src: url("../assets/fonts/ReadyActive/ReadyActive-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Ready Active";
+    src: url("../assets/fonts/ReadyActive/ReadyActive-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Ready Active";
+    src: url("../assets/fonts/ReadyActive/ReadyActive-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+}

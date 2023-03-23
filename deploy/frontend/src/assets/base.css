@@ -1,0 +1,39 @@
+:root {
+    --font-size-title: 2rem;
+    --font-size-sub: 1rem;
+    --font-size-small: 0.7rem;
+    --padding-size-main: 2rem;
+    --font-family-main: 'Petit Frere Wide';
+    --font-family-second: 'Petit Frere Narrow';
+    --font-family-title: 'Ready Active';
+}
+
+li {
+    list-style:none;
+}
+
+* {
+    user-select: none;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+}
+
+[theme="light"] {
+    --main-color: #422F4B;
+    --main-background-color: #EBE8F1;
+    --second-color: #B25A38;
+    color: var(--main-color);
+    background-color: var(--main-background-color);
+}
+
+[theme="dark"] {
+    --main-color: #A0CBE4;
+    --second-color: #DA9653; 
+    --main-background-color: #0B1D23;
+    color: var(--main-color);
+    background-color: var(--main-background-color);
+}
