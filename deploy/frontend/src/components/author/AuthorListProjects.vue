@@ -1,22 +1,22 @@
 <script setup>
-
     import  { onMounted, computed } from 'vue'
 
     import { useRoute } from 'vue-router'
    
     import { storeToRefs } from 'pinia'
-    
+
     import { useProjetStore } from '../../store/projects'
     
     const props = defineProps(['id'])
     
     const { projects, loading, error } = storeToRefs(useProjetStore())
-    
-    const { fetchProjetsNotion } = useProjetStore()
+
+    const { fetchProjetsAuthor } = useProjetStore()
 
     onMounted(() => {
-        fetchProjetsNotion(props.id)
+        fetchProjetsAuthor(props.id)
     })
+
 
 </script>
 
@@ -26,14 +26,12 @@
 
     <div 
       v-if="projects.length > 0"
-      class="notion-projects"
+      class="author-projects"
     >
-
-
-        <div
+         <div
             v-for="project in projects"
             :key="project.id"
-            class="notion-projects--item"
+            class="author-projects--item"
             > 
             
             <h2>project</h2>
@@ -48,8 +46,9 @@
             </svg> 
         
         </div>
-        
+
     </div>
+
 </template>
 
 <style scoped>

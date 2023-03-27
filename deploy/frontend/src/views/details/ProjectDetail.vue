@@ -1,5 +1,7 @@
 <script setup>
 
+    import { computed } from 'vue'
+
     import { useRoute } from 'vue-router'
     import { storeToRefs } from 'pinia'
 
@@ -18,6 +20,10 @@
     const { fetchOneProjet } = useProjetStore()
 
     fetchOneProjet(route.params.slug)
+
+    function setWordToLower(word) {
+        return word.toLowerCase()
+    }
 
 </script>
 
@@ -46,7 +52,7 @@
                         
                         <h2 v-if="!project.no_date">Creation</h2>
                         <p v-if="!project.no_date">
-                            <RouterLink :to="`/projects/year/${formatDate(project.date_creation)}`">{{ formatDate(project.date_creation) }}</RouterLink>
+                            <RouterLink :to="`/year/${formatDate(project.date_creation)}`">{{ formatDate(project.date_creation) }}</RouterLink>
                         </p>
 
                         <h2>{{ project.author.group ? "Collectif" : "Author" }} </h2>
@@ -63,17 +69,17 @@
                         
                         <h2 v-if="project.usage">Usage</h2>
                         <p v-if="project.usage">
-                            <RouterLink :to="`/usage/${project.usage}`">{{ project.usage }}</RouterLink>
+                            <RouterLink :to="`/usage/${setWordToLower(project.usage)}`">{{ project.usage }}</RouterLink>
                         </p>
 
                         <h2 v-if="project.temporality">Temporality</h2>
                         <p v-if="project.temporality">
-                            <RouterLink :to="`/temporality/${project.temporality}`">{{ project.temporality }}</RouterLink>
+                            <RouterLink :to="`/temporality/${setWordToLower(project.temporality)}`">{{ project.temporality }}</RouterLink>
                         </p>
 
                         <h2 v-if="project.environnement">Technical Environnement</h2>
                         <p v-if="project.environnement">
-                            <RouterLink :to="`/environnement/${project.environnement}`">{{ project.environnement }}</RouterLink>
+                            <RouterLink :to="`/environment/${setWordToLower(project.environnement)}`">{{ project.environnement }}</RouterLink>
                         </p>
                         
                         <h2 v-if="project.licence">Licence</h2>

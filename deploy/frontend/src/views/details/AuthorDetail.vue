@@ -1,20 +1,29 @@
 <script setup>
 
-    import { useRoute } from 'vue-router'
+    import { ref, reactive, computed, onMounted } from 'vue'
 
     import { storeToRefs } from 'pinia'
     import { useAuthorStore } from '../../store/authors'
 
-    import AuthorProjects from '../../components/AuthorProjects.vue'
+    import AuthorProjects from '../../components/author/AuthorProjects.vue'
 
-    import { cleanURL } from '../../mixins/cleanURL'
+    const { authors, author, loading, error } = storeToRefs(useAuthorStore())
 
-    const route = useRoute()
+    const { fetchAuthors, setAuthor } = useAuthorStore()
 
-    const { author, loading, error } = storeToRefs(useAuthorStore())
-    const { fetchAuthorBySlug } = useAuthorStore()
+    onMounted(() => {
+        fetchAuthors()
+        setAuthor()
+    })
 
-    fetchAuthorBySlug(route.params.slug)
+    const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
+
+    function filterByLetter(authors, letter) {
+        const filterAuthor = authors.filter((item) => {
+            return item.name.charAt(0).toLowerCase() === letter
+        })
+        return filterAuthor
+    }
 
 </script>
 
@@ -22,23 +31,66 @@
 
     <main>
         <p v-if="loading">Loading post...</p>
+        
         <p v-if="error">{{ error.message }}</p>
-        <div 
-            v-if="author"
-            class="author"
-        >
-            <div class="author-header">
-                <h1>{{ author.firstname ? author.firstname : null }} {{ author.name }}</h1>
-                <p class="description">
-                    {{ author.bio }}
-                </p>
-                <h2 v-if="author.url">Link</h2>
-                <p v-if="author.url"><a :href="author.url">{{ cleanURL(author.url) }}</a></p>
-            </div>
-            <AuthorProjects :id="author.id" />
 
-        </div>
+        <div class="author--container">
+            <div class="author--left">
+                 <div 
+                    v-for="(letter, index) in alphabet"
+                    :key="index"
+                >
+                    <div 
+                        v-if="filterByLetter(authors, letter).length"
+                        class="lettrine">
+                        {{ letter }}.
+                    </div>
+
+                    <div
+                        v-if="filterByLetter(authors, letter)"
+                        class="author--list"
+                    >
+                        <div
+                            v-for="author in filterByLetter(authors, letter)"
+                            :key="author.id"
+                            class="author--item"
+                        >
+
+                            <h2>
+                                <router-link
+                                    @click="setAuthor(author)"
+                                    :to="`${author.slug}`"    
+                                >
+                                    {{ author.group ? null : author.firstname }} {{ author.name }}
+                                </router-link>
+                            </h2>
+                                
+                        </div>
+                    
+                    
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="author--right">
+                <author-projects></author-projects>
+            </div>
+
+       </div>
 
     </main>
     
 </template>
+
+<style scoped>
+
+    .author--list {
+        flex-direction: column;
+    }
+
+    .author--item {
+        width: 100%;
+    }
+
+</style>

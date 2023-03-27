@@ -45,6 +45,11 @@ class NotionSerializer(ModelSerializer):
         model = Notion
         fields = "__all__"
 
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["type"] = 'notion'
+        return data
+
 
 class ProjectSerializer(ModelSerializer):
 
@@ -56,6 +61,11 @@ class ProjectSerializer(ModelSerializer):
         model = Project
         fields = "__all__"
         depth = 1
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["type"] = 'project'
+        return data
 
 
 class ArticleSerializer(ModelSerializer):

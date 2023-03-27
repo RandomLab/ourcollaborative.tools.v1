@@ -13,13 +13,13 @@ export const useSearchStore = defineStore({
     getters: {
     },
     actions: {
-        async fetchSearch(words) {
+        async fetchSearch(words, type) {
             this.results = []
             this.loading = true
 
             try {
                 this.results = await axios
-                                        .get(`search/?search=${words}`)
+                                        .get(`search_${type}/?search=${words}`)
                                         .then((response) => {
                                             return response.data
                                         })

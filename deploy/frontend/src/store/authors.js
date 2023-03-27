@@ -10,17 +10,12 @@ export const useAuthorStore = defineStore({
         loading: null,
         error: null
     }),
-    getters: {
-        // getAuthorById: (state) => {
-        //     return (authorId) => {
-        //         const author =  state.authors.find((author) => {
-        //             return author.id === authorId
-        //         })
-        //         return author
-        //     }
-        // }    
-    },
     actions: {
+
+        setAuthor(obj) {
+            this.author = obj
+        },
+
         async fetchAuthors() {
             this.authors = []
             this.loading = true

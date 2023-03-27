@@ -1,21 +1,48 @@
 <script setup>
 
-    import { storeToRefs } from 'pinia'
-    
-    import { useProjetStore } from '../../store/projects'
-    
-    const props = defineProps(['id'])
-    
-    const { projects, loading, error } = storeToRefs(useProjetStore())
-    
-    const { fetchProjetsNotion } = useProjetStore()
+    import { ref, reactive, computed, onMounted, watchEffect } from 'vue'
 
-    fetchProjetsNotion(props.id)
+    import { useRoute } from 'vue-router'
+
+    import { storeToRefs } from 'pinia'
+    import { useNotionStore } from '../../store/notions'
+
+    import NotionListProjects from './NotionListProjects.vue'
+
+    const route = useRoute()
+
+    const { notion, loading, error } = storeToRefs(useNotionStore())
+
+    const { fetchNotionBySlug } = useNotionStore()
+
+    onMounted(() => {
+        fetchNotionBySlug(route.params.slug)
+    })
+
+    watchEffect(() => {
+        fetchNotionBySlug(route.params.slug)
+    })
+
 
 </script>
 
-<template>
+<template>  
+
+    <p v-if="loading">Loading post...</p>
+        
+    <p v-if="error">{{ error.message }}</p>
     
-    {{ projects }}
+    <div 
+        v-if="notion"
+        class="notion--detail"
+    >
+
+        <h1>{{ notion.title }}</h1>
+
+        <div class="ref">projets</div>
+
+        <notion-list-projects :id="notion.id"></notion-list-projects>
+
+    </div>
 
 </template>

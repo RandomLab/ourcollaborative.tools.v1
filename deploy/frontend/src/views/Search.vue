@@ -5,35 +5,56 @@
     import { storeToRefs } from 'pinia'
     import { useSearchStore } from '../store/search'
 
+    import Results from '../components/Results.vue'
+
     const { results, loading, error } = storeToRefs(useSearchStore())
 
     const { fetchSearch } = useSearchStore()
 
     const search = reactive({
         word: '',
+        type: 'projects'
     })
+
+    function lauchSearch() {
+        fetchSearch(search.word, search.type)
+        search.word = ''
+    }
 
 </script>
 
 <template>
     <main>
-        <input 
-            type="text"
-            placeholder="search"
-            v-model="search.word"
-            @keyup.enter="fetchSearch(search.word)"
-        >
+        
+        <div class="search-index">
+            <h2>Search through all <button @click="search.type = 'projects'">projects</button> or <button @click="search.type = 'notions'">notions</button></h2>
+            <input 
+                type="text"
+                :placeholder="`search in ${search.type}`"
+                v-model="search.word"
+                @keyup.enter="lauchSearch"
+            >
+        </div>
 
         <div v-if="loading">loading</div>
         <div v-if="error">{{  error.message }}</div>
-        <div v-if="results" class="index">
-        <li 
-            v-for="result in results"
-            :key="result.id"
+
+        <div 
+            v-if="results.length > 0" 
+            class="search-results"
         >
-            <RouterLink :to="`/project/${result.slug}`">{{ result.title }}</RouterLink>
-        </li>
-    </div>
+
+            <div
+                v-for="result in results"
+                :key="result.id"
+            >
+                <results :result="result"></results>
+
+            </div>
+
+        </div>
+
+        <div v-else class="no-result">no results</div>
 
     </main>
    

@@ -1,5 +1,11 @@
 <template>
-    <div>
-        page not found
-    </div>
+    <main>
+
+        <div 
+                class="lettrine"
+            >
+                <h1>404, page not found</h1>
+        </div>
+
+    </main>
 </template>

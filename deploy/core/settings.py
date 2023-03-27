@@ -20,6 +20,7 @@ CSRF_TRUSTED_ORIGINS = [
 REST_FRAMEWORK = {
     "DATETIME_FORMAT": "%Y-%m-%dT%H:%M:%S.%f%z",
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
@@ -35,6 +36,7 @@ INSTALLED_APPS = [
     "embed_video",
     "django_extensions",
     "debug_toolbar",
+    "django_filters",
     "fiches",
     "pages",
     "corsheaders",

@@ -1,6 +1,6 @@
 <script setup>
 
-    import { ref } from 'vue'
+    import { ref, reactive, computed, onMounted } from 'vue'
     
     import { storeToRefs } from 'pinia'
 
@@ -8,42 +8,53 @@
 
     import { useProjetStore } from '../store/projects'
 
-    const { projects, loading, error } = storeToRefs(useProjetStore())
-
-    const { fetchProjets, filterTemporalityProjects, filterUsageProjects, filterEnvProjects } = useProjetStore()
-
-    fetchProjets()
-
     import IndexProject from '../components/project/IndexProject.vue'
 
-    const selectedTemporality = ref("Temporality")
-    const selectedUsage = ref("Usage")
-    const selectedEnv = ref("Environnement")
+    import Filtres from '../components/utils/Filtres.vue'
 
-    function changeTemporality(e) {
-        if (selectedTemporality.value === "Temporality") {
-            fetchProjets()
-        } else {
-            filterTemporalityProjects(selectedTemporality.value)
+    const { projects, loading, error } = storeToRefs(useProjetStore())
+
+    const { fetchProjets, triAlpha } = useProjetStore()
+
+    onMounted(() => {
+        fetchProjets()
+    })
+
+    const state = reactive({
+            type: null,
+            name: null
+        })
+
+    function setState(newState) {
+
+        state.type = newState.type
+        state.name = newState.name
+
+        if (state.type === null) {
+            triAlpha(state.name)
         }
+
     }
 
-    function changeUsage(e) {
-        if (selectedUsage.value === "Usage") {
-            fetchProjets()
-        } else {
-            filterUsageProjects(selectedUsage.value)
-        }
-    }
+    function filteredProjects(projects) {
 
-    function changeEnv(e) {
-        if (selectedEnv.value === "Environnement") {
-            fetchProjets()
+        if (state.type === 'temporality') {
+            return state.type === null ? projects : projects.filter((project) => {
+                return project.temporality === state.name
+            })
+        } else if (state.type === 'usage') {
+            return state.type === null ? projects : projects.filter((project) => {
+                return project.usage === state.name
+            })
+        } else if (state.type === 'environment') {
+            return state.type === null ? projects : projects.filter((project) => {
+                return project.environment === state.name
+            })
         } else {
-            filterEnvProjects(selectedEnv.value)
+            return projects
         }
     }
-    
+  
 </script>
 
 <template>
@@ -53,35 +64,32 @@
         <div v-if="loading">loading</div>
 
         <div v-if="error">{{  error.message }}</div>
-        
+
+        <div class="filters">
+            <button @click="setState({ type: null, name: 'asc' })">ascending</button>
+            <button @click="setState({ type: null, name: 'desc' })">descending</button>
+            
+            <button @click="setState({ type: 'temporality', name: 'event'})">event</button>
+            <button @click="setState({ type: 'temporality', name: 'continuous'})">continuous</button>
+
+            <button @click="setState({ type: 'usage', name: 'cooperation'})">cooperation</button>
+            <button @click="setState({ type: 'usage', name: 'collaboration'})">collaboration</button>
+            <button @click="setState({ type: 'usage', name: 'contribution'})">contribution</button>
+            <button @click="setState({ type: 'usage', name: 'participatory'})">participatory</button>
+
+            <button @click="setState({ type: 'environment', name: 'web'})">web</button>
+            <button @click="setState({ type: 'environment', name: 'desktop'})">desktop</button>
+            <button @click="setState({ type: 'environment', name: 'mobile'})">mobile</button>
+        </div>
+
         <div v-if="projects" class="project-index">
 
-            <!-- <select v-model="selectedTemporality" @change="changeTemporality">
-                <option value="Temporality">Temporality</option>
-                <option value="Event">Event</option>
-                <option value="Continuous">Continuous</option>
-            </select>
-
-            <select v-model="selectedUsage" @change="changeUsage">
-                <option value="Usage">Usage</option>
-                <option value="Collaboration">Collaboration</option>
-                <option value="Cooperation">Cooperation</option>
-                <option value="Contribution">Contribution</option>
-                <option value="Participatory">Participatory</option>
-            </select>
-
-             <select v-model="selectedEnv" @change="changeEnv">
-                <option value="Environnement">Environnement</option>
-                <option value="Web">Web</option>
-                <option value="Desktop">Desktop</option>
-                <option value="Mobile">Mobile</option>
-            </select> -->
-
             <div
-                v-for="project in projects"
+                v-for="project in filteredProjects(projects)"
                 :key="project.id"
                 class="project--item"
-            >
+            >   
+                            
                 <index-project 
                     :project="project" 
                     :id="project.id">
@@ -94,3 +102,9 @@
     </main>
         
 </template>
+
+<style scoped>
+    .filters {
+        justify-content: space-between;
+    }
+</style>

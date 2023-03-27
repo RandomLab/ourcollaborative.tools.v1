@@ -1,20 +1,30 @@
 <script setup>
 
-    import { useRoute } from 'vue-router'
+    import { ref, reactive, computed, onMounted } from 'vue'
 
     import { storeToRefs } from 'pinia'
-    
     import { useNotionStore } from '../../store/notions'
 
-    import NotionProjects from '../../components/notion/NotionListProjects.vue'
+    import NotionProjects from '../../components/notion/NotionProjects.vue'
+    
+    const { notions, notion, loading, error } = storeToRefs(useNotionStore())
 
-    const route = useRoute()
+    const { fetchNotions, setNotion } = useNotionStore()
 
-    const { notion, loading, error } = storeToRefs(useNotionStore())
+    onMounted(() => {
+        fetchNotions()
+        setNotion()
+    })
 
-    const { fetchNotionBySlug } = useNotionStore()
 
-    fetchNotionBySlug(route.params.slug)
+    const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
+
+    function filterByLetter(notions, letter) {
+        const filterNotion = notions.filter((item) => {
+            return item.title.charAt(0).toLowerCase() === letter
+        })
+        return filterNotion
+    }
 
 </script>
 
@@ -26,21 +36,62 @@
         
         <p v-if="error">{{ error.message }}</p>
         
-        <div 
-            v-if="notion"
-            class="notion"
-        >
-            <div class="notion-header">
-                <h1>{{ notion.title }}</h1>
-                <p class="description">
-                    {{  notion.content }}
-                </p>
+        <div class="notion--container">
+            <div class="notion--left">
+                <div 
+                    v-for="(letter, index) in alphabet"
+                    :key="index"
+                >
+                    <div 
+                        v-if="filterByLetter(notions, letter).length"
+                        class="lettrine">
+                        {{ letter }}.
+                    </div>
+
+                    <div 
+                        v-if="filterByLetter(notions, letter)" 
+                        class="notion--list"
+                    >
+                        
+                        <div 
+                            
+                            v-for="notion in filterByLetter(notions, letter)"
+                            :key="notion.id"
+                            class="notion--item"
+                        >
+                            <h2><router-link
+                                @click="setNotion(notion)" 
+                                :to="`${notion.slug}`">{{ notion.title }}</router-link></h2>
+                            <p>{{ notion.content }}</p>
+
+                        </div>
+
+                    </div>
+
+                </div>             
             </div>
+            <div 
+                class="notion--right"
+            >
 
-            <NotionProjects :id="notion.id" />
+                <notion-projects></notion-projects>
 
+
+            </div>
         </div>
 
     </main>
 
 </template>
+
+<style scoped>
+
+.notion--list {
+    flex-direction: column;
+}
+
+.notion--item {
+    width: 100%;
+}
+
+</style>

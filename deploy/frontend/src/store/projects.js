@@ -11,60 +11,11 @@ export const useProjetStore = defineStore({
         error: null,
     }),
     actions: {
-        async filterEnvProjects(env) {
-            this.projects = []
-            this.loading = true
-            try {
-                this.projects = await axios
-                                        .get('project/')
-                                        .then((response) => {
-                                            return response.data.filter((project) => {
-                                                return project.environnement === env
-                                            })
-                                        })
-
-            } catch(error) {
-                this.error = error
-            } finally {
-                this.loading = false
-            }
-        },
-        async filterUsageProjects(usage) {
-            this.projects = []
-            this.loading = true
-            try {
-                this.projects = await axios
-                                        .get('project/')
-                                        .then((response) => {
-                                            return response.data.filter((project) => {
-                                                return project.usage === usage
-                                            })
-                                        })
-
-            } catch(error) {
-                this.error = error
-            } finally {
-                this.loading = false
-            }
-        },
-        async filterTemporalityProjects(temporality) {
-            this.projects = []
-            this.loading = true
-            try {
-                this.projects = await axios
-                                        .get('project/')
-                                        .then((response) => {
-                                            return response.data.filter((project) => {
-                                                return project.temporality === temporality
-                                            })
-                                        })
-
-            } catch(error) {
-                this.error = error
-            } finally {
-                this.loading = false
-            }
-        },
+        
+        /*--------------------*/
+        /* data
+        /*--------------------*/
+        
         async fetchProjets() {
             this.projects = []
             this.loading = true
@@ -99,6 +50,76 @@ export const useProjetStore = defineStore({
                 this.loading = false
             }
         },
+
+        async fetchProjetsAuthor(authorId) {
+            this.projects = []
+            this.loading = true
+
+            try {
+                this.projects = await axios
+                                        .get(`projects_by_author/${authorId}`)
+                                        .then((response) => {
+                                            return response.data
+                                        })
+                
+
+            } catch(error) {
+                this.error = error
+            } finally {
+                this.loading = false
+            }
+        },
+
+        /*--------------------*/
+        /* tri
+        /*--------------------*/
+
+        triAlpha(direction) {
+            if (direction === 'asc') {
+                this.projects.sort((a, b) => {
+                        
+                    if (a.title.toLowerCase() < b.title.toLowerCase()) {
+                        return -1
+                    }
+    
+                    if (a.title.toLowerCase() > b.title.toLowerCase()) {
+                        return 1
+                    }
+                    return 0
+    
+                })
+            } else {
+                this.projects.reverse((a, b) => {
+                        
+                    if (a.title.toLowerCase() < b.title.toLowerCase()) {
+                        return -1
+                    }
+    
+                    if (a.title.toLowerCase() > b.title.toLowerCase()) {
+                        return 1
+                    }
+                    return 0
+    
+                })
+            }
+        },
+
+        /*--------------------*/
+        /* filres Client
+        /*--------------------*/
+        
+        // filterBy() {
+        //     this.projects = this.projects.filter((item) => {
+        //         return item.temporality === 'continuous'
+        //     })
+        //     console.log(this.projects)
+        // },
+
+        /*--------------------*/
+        /* filres API
+        /*--------------------*/
+
+
         async fetchProjetsEnvironnement(environnement) {
             this.projects = []
             this.loading = true
@@ -171,24 +192,7 @@ export const useProjetStore = defineStore({
                 this.loading = false
             }
         },
-        async fetchProjetsAuthor(authorId) {
-            this.projects = []
-            this.loading = true
 
-            try {
-                this.projects = await axios
-                                        .get(`projects_by_author/${authorId}`)
-                                        .then((response) => {
-                                            return response.data
-                                        })
-                
-
-            } catch(error) {
-                this.error = error
-            } finally {
-                this.loading = false
-            }
-        },
         async fetchProjetsYear(year) {
             this.projects = []
             this.loading = true
@@ -206,6 +210,7 @@ export const useProjetStore = defineStore({
             } finally {
                 this.loading = false
             }
-        }
+        },
+       
     }
 })

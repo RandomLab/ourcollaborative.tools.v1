@@ -3,7 +3,6 @@
     import { ref } from 'vue'
     import { useRouter, useRoute } from 'vue-router'
    
-
     import Icon from '../../components/utils/Glyph.vue'
     
     const router = useRouter()
@@ -20,7 +19,7 @@
 
 <template>
     
-    <div 
+    <div
         class="item-detail"
         @mouseenter="hover = true"
         @mouseleave="hover = false"
@@ -32,7 +31,6 @@
             :class="hover ? 'hide' : 'show'"
         />
 
-   
         <div 
             class="item-info"
             :class="hover ? 'show' : 'hide'"
@@ -45,7 +43,6 @@
         </div>
 
     </div>
-
 
 </template>
 

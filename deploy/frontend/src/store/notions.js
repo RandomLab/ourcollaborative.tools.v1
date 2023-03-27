@@ -11,6 +11,11 @@ export const useNotionStore = defineStore({
         error: null
     }),
     actions: {
+
+        setNotion(obj) {
+            this.notion = obj
+        },
+        
         async fetchNotions() {
             this.notions = []
             this.loading = true

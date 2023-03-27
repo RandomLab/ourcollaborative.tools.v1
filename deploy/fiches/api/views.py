@@ -41,14 +41,31 @@ class ImagesViewSet(ReadOnlyModelViewSet):
 # search
 # ----------------------------
 
+class SearchNotionView(ListAPIView):
+    queryset = Notion.objects.filter(publish=True).order_by("title")
+    serializer_class = NotionSerializer
+    filter_backends = [SearchFilter, OrderingFilter]
+    search_fields = [
+        "title",
+        "content"
+    ]
 
-class SearchView(ListAPIView):
-    queryset = Project.objects.filter(publish=True).order_by("id")
+class SearchProjectView(ListAPIView):
+    queryset = Project.objects.filter(publish=True).order_by("title")
     serializer_class = ProjectSerializer
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = [
         "title",
         "description",
+        "date_pub",
+        "author__name",
+        "author__firstname",
+        "author__bio",
+        "author__pronoun",
+        "notion__title",
+        "notion__content",
+        "temporality",
+        "usage"
     ]
 
 
@@ -170,6 +187,7 @@ class ProjectsByUsage(ListAPIView):
         by filtering against a `notion` query parameter in the URL.
         """
         usage_name = self.kwargs["usage_name"]
+        print(usage_name)
         queryset = Project.objects.filter(usage=usage_name)
         return queryset
 

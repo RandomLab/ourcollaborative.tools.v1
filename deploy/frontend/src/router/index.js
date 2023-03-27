@@ -44,8 +44,8 @@ const routes = [
 
     },
     {
-        path: '/projects/year/:year',
-        name: 'years',
+        path: '/year/:year',
+        name: 'year',
         component: Years
     },
     {
@@ -89,8 +89,8 @@ const routes = [
         component: Temporalities
     },
     {
-        path: '/environnement/:name',
-        name: 'environnement',
+        path: '/environment/:name',
+        name: 'environment',
         component: Environnements
     },
     {

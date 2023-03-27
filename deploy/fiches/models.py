@@ -194,8 +194,8 @@ class Project(models.Model):
     publish = BooleanField(default=False)
 
     TIME_STATUS = (
-        ("Event", "Event"),
-        ("Continuous", "Continuous"),
+        ("event", "Event"),
+        ("continuous", "Continuous"),
     )
 
     temporality = CharField(
@@ -203,10 +203,10 @@ class Project(models.Model):
     )
 
     USAGE_TYPE = (
-        ("Collaboration", "Collaboration"),
-        ("Cooperation", "Cooperation"),
-        ("Contribution", "Contribution"),
-        ("Participatory", "Participatory"),
+        ("collaboration", "Collaboration"),
+        ("cooperation", "Cooperation"),
+        ("contribution", "Contribution"),
+        ("participatory", "Participatory"),
     )
 
     usage = CharField(
@@ -214,13 +214,13 @@ class Project(models.Model):
     )
 
     ENV_TYPE = (
-        ("Web", "Web"),
-        ("Desktop", "Desktop"),
-        ("Mobile", "Mobile"),
+        ("web", "Web"),
+        ("desktop", "Desktop"),
+        ("mobile", "Mobile"),
     )
 
-    environnement = CharField(
-        max_length=10, choices=ENV_TYPE, blank=True, default="Web"
+    environment = CharField(
+        max_length=10, choices=ENV_TYPE, blank=True, default="web"
     )
 
     licence = models.ForeignKey(

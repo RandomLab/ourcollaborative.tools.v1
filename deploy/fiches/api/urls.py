@@ -3,7 +3,9 @@ from django.conf.urls import include
 from rest_framework import routers
 
 from fiches.api.views import (
-    SearchView,
+
+    SearchProjectView,
+    SearchNotionView,
 
     ProjectViewSet,
     ArticleViewSet,
@@ -42,7 +44,8 @@ licence_router = routers.SimpleRouter()
 licence_router.register("licence", LicenceViewSet, basename="licence")
 
 urlpatterns = [
-    path("search/", SearchView.as_view()),
+    path("search_projects/", SearchProjectView.as_view()),
+    path("search_notions/", SearchNotionView.as_view()),
 
     path("", include(images_router.urls)),
     path("", include(project_router.urls)),

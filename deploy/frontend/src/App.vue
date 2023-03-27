@@ -1,13 +1,19 @@
 <script setup>
-    import { RouterView } from 'vue-router'
+    import { RouterView, RouterLink } from 'vue-router'
     import { useDark, useToggle } from '@vueuse/core'
+
+    import Header from './components/Header.vue'
+    import Footer from './components/Footer.vue'
+
     const isDark = useDark({
         selector: "body",
         attribute: "theme",
         valueDark: "dark",
         valueLight: "light"
     })
+
     const toggleDark = useToggle(isDark)
+
 </script>
 
 <template>
@@ -15,6 +21,7 @@
         <Header/>
         <RouterView />
         <div class="search">
+            <router-link to="/search">search</router-link>
             <svg 
                 @click="toggleDark()" 
                 viewBox="0 0 100 100" 
@@ -32,6 +39,7 @@
                 <circle cx="50" cy="50" r="40"/>
             </svg>
         </div>
+        <Footer />
     </div>
 </template>
 
