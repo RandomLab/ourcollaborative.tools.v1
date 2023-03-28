@@ -120,13 +120,13 @@ export const useProjetStore = defineStore({
         /*--------------------*/
 
 
-        async fetchProjetsEnvironnement(environnement) {
+        async fetchProjetsEnvironnement(environment) {
             this.projects = []
             this.loading = true
 
             try {
                 this.projects = await axios
-                                        .get(`projects_by_environnement/${environnement}`)
+                                        .get(`projects_by_environment/${environment}`)
                                         .then((response) => {
                                             return response.data
                                         })

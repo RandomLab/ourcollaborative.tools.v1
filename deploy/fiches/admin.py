@@ -55,8 +55,7 @@ class ImageProjectAdmin(admin.StackedInline):
 @admin.register(Project)
 class ProjectAdmin(AdminVideoMixin, admin.ModelAdmin):
     """
-    A class to represent an article.
-
+    A class to represent an project.
     """
 
     inlines = [ImageProjectAdmin]

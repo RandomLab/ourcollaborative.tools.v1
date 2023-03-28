@@ -206,7 +206,7 @@ class ProjectsByTemporality(ListAPIView):
         return queryset
 
 
-class ProjectsByEnvironnement(ListAPIView):
+class ProjectsByEnvironment(ListAPIView):
 
     serializer_class = ProjectSerializer
 
@@ -215,8 +215,8 @@ class ProjectsByEnvironnement(ListAPIView):
         Restricts the returned notion to a given project,
         by filtering against a `notion` query parameter in the URL.
         """
-        environnement_name = self.kwargs["environnement_name"]
-        queryset = Project.objects.filter(environnement=environnement_name)
+        environment_name = self.kwargs["environment_name"]
+        queryset = Project.objects.filter(environment=environment_name)
         return queryset
 
 

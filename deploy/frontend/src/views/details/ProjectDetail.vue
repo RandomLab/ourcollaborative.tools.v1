@@ -77,9 +77,9 @@
                             <RouterLink :to="`/temporality/${setWordToLower(project.temporality)}`">{{ project.temporality }}</RouterLink>
                         </p>
 
-                        <h2 v-if="project.environnement">Technical Environnement</h2>
-                        <p v-if="project.environnement">
-                            <RouterLink :to="`/environment/${setWordToLower(project.environnement)}`">{{ project.environnement }}</RouterLink>
+                        <h2 v-if="project.environment">Technical Environnement</h2>
+                        <p v-if="project.environment">
+                            <RouterLink :to="`/environment/${setWordToLower(project.environment)}`">{{ project.environment }}</RouterLink>
                         </p>
                         
                         <h2 v-if="project.licence">Licence</h2>
@@ -87,7 +87,7 @@
                             <RouterLink :to="`/licence/${project.licence.slug}`">{{ project.licence.title }}</RouterLink>
                         </p>
                         
-                        <h2>Notions</h2>
+                        <h2 v-if="project.notion">Notions</h2>
                         <li
                             v-for="notion in project.notion"
                             :key="notion.id"

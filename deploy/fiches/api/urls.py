@@ -21,7 +21,7 @@ from fiches.api.views import (
     ProjectsByAuthor,
     ProjectsByUsage,
     ProjectsByTemporality,
-    ProjectsByEnvironnement,
+    ProjectsByEnvironment,
     ProjectsByYear
 )
 
@@ -62,7 +62,7 @@ urlpatterns = [
 
     path("projects_by_usage/<str:usage_name>/", ProjectsByUsage.as_view()),
     path("projects_by_temporality/<str:temporality_name>/", ProjectsByTemporality().as_view()),
-    path("projects_by_environnement/<str:environnement_name>/", ProjectsByEnvironnement().as_view()),
+    path("projects_by_environment/<str:environment_name>/", ProjectsByEnvironment().as_view()),
 
     path("projects_by_year/<str:year>/", ProjectsByYear().as_view())
 ]

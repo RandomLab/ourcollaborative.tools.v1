@@ -199,7 +199,7 @@ class Project(models.Model):
     )
 
     temporality = CharField(
-        max_length=15, choices=TIME_STATUS, blank=True, default="Event"
+        max_length=15, choices=TIME_STATUS, blank=True, default="event"
     )
 
     USAGE_TYPE = (
@@ -210,7 +210,7 @@ class Project(models.Model):
     )
 
     usage = CharField(
-        max_length=15, choices=USAGE_TYPE, blank=True, default="Collaboration"
+        max_length=15, choices=USAGE_TYPE, blank=True, default="collaboration"
     )
 
     ENV_TYPE = (
@@ -220,7 +220,7 @@ class Project(models.Model):
     )
 
     environment = CharField(
-        max_length=10, choices=ENV_TYPE, blank=True, default="web"
+        max_length=15, choices=ENV_TYPE, blank=True, default="web"
     )
 
     licence = models.ForeignKey(
@@ -246,9 +246,6 @@ class Project(models.Model):
     def __str__(self) -> str:
         """return str representation of object"""
         return f"{self.title}"
-
-
-
 
 
 class ImageProject(models.Model):
