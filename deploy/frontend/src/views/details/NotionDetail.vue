@@ -62,7 +62,6 @@
                             <h2><router-link
                                 @click="setNotion(notion)" 
                                 :to="`${notion.slug}`">{{ notion.title }}</router-link></h2>
-                            <p>{{ notion.content }}</p>
 
                         </div>
 

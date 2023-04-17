@@ -3,7 +3,7 @@ import {
     createWebHistory
 } from 'vue-router'
 
-import Home from '../views/Home.vue'
+// import Home from '../views/Home.vue'
 
 import Projects from '../views/Projects.vue'
 import Project from '../views/details/ProjectDetail.vue'
@@ -28,6 +28,8 @@ import Search from '../views/Search.vue'
 import Usages from '../views/Usages.vue'
 import Temporalities from '../views/Temporalities.vue'
 import Environnements from '../views/Environnements.vue'
+
+import Mediagraphy from '../views/Mediagraphy.vue'
 
 import PageNotFound from '../views/PageNotFound.vue'
 
@@ -102,6 +104,11 @@ const routes = [
         path: '/author/:slug',
         name: 'author',
         component: AuthorDetail
+    },
+    {
+        path:'/mediagraphy',
+        name: 'mediagraphy',
+        component: Mediagraphy
     },
     {
         path: '/about',

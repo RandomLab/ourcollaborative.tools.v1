@@ -6,48 +6,50 @@ from fiches.models import (
     Author,
     Notion,
     Licence,
+    Reference,
     ImageProject,
     ImageArticle,
 )
 
 
 class ImageArticleSerializer(ModelSerializer):
-    
     class Meta:
         model = ImageArticle
         fields = "__all__"
 
 
 class ImageProjectSerializer(ModelSerializer):
-    
     class Meta:
         model = ImageProject
         fields = "__all__"
 
 
-class LicenceSerializer(ModelSerializer):
+class ReferenceSerializer(ModelSerializer):
+    class Meta:
+        model = Reference
+        fields = "__all__"
 
+
+class LicenceSerializer(ModelSerializer):
     class Meta:
         model = Licence
         fields = "__all__"
 
 
 class AuthorSerializer(ModelSerializer):
-
     class Meta:
         model = Author
         fields = "__all__"
 
 
 class NotionSerializer(ModelSerializer):
-
     class Meta:
         model = Notion
         fields = "__all__"
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data["type"] = 'notion'
+        data["type"] = "notion"
         return data
 
 
@@ -64,7 +66,7 @@ class ProjectSerializer(ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data["type"] = 'project'
+        data["type"] = "project"
         return data
 
 

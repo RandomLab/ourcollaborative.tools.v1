@@ -10,8 +10,10 @@
         <RouterLink class="titre" to="/">Our <span>Collaborative</span> Tools</RouterLink>
         <nav>
             <RouterLink to="/">Index</RouterLink>
+            <RouterLink to="/articles">Articles</RouterLink>
             <RouterLink to="/notions">Notions</RouterLink>
             <RouterLink to="/authors">Authors</RouterLink>
+            <RouterLink to="/mediagraphy">Media</RouterLink>
             <RouterLink to="/about">about</RouterLink>
             
         </nav>

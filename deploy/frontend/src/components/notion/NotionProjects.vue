@@ -38,6 +38,7 @@
     >
 
         <h1>{{ notion.title }}</h1>
+        <p>{{ notion.content }}</p>
 
         <div class="ref">projets</div>
 

@@ -14,7 +14,7 @@
 
     const { projects, loading, error } = storeToRefs(useProjetStore())
 
-    const { fetchProjets, triAlpha } = useProjetStore()
+    const { fetchProjets, triAlpha, triDate } = useProjetStore()
 
     onMounted(() => {
         fetchProjets()
@@ -30,8 +30,12 @@
         state.type = newState.type
         state.name = newState.name
 
-        if (state.type === null) {
-            triAlpha(state.name)
+        if (state.type === 'alpha') {
+            triAlpha()
+        }
+
+        if (state.type === 'date') {
+            triDate()
         }
 
     }
@@ -66,20 +70,23 @@
         <div v-if="error">{{  error.message }}</div>
 
         <div class="filters">
-            <button @click="setState({ type: null, name: 'asc' })">ascending</button>
-            <button @click="setState({ type: null, name: 'desc' })">descending</button>
+            <button @click="setState({ type: 'alpha', name: null })">title</button>
+
+            <button @click="setState({ type: 'date', name: null })">date</button>
             
-            <button @click="setState({ type: 'temporality', name: 'event'})">event</button>
+            <!-- <button @click="setState({ type: 'temporality', name: 'event'})">event</button>
             <button @click="setState({ type: 'temporality', name: 'continuous'})">continuous</button>
 
-            <button @click="setState({ type: 'usage', name: 'cooperation'})">cooperation</button>
             <button @click="setState({ type: 'usage', name: 'collaboration'})">collaboration</button>
             <button @click="setState({ type: 'usage', name: 'contribution'})">contribution</button>
             <button @click="setState({ type: 'usage', name: 'participatory'})">participatory</button>
 
             <button @click="setState({ type: 'environment', name: 'web'})">web</button>
             <button @click="setState({ type: 'environment', name: 'desktop'})">desktop</button>
-            <button @click="setState({ type: 'environment', name: 'mobile'})">mobile</button>
+            <button @click="setState({ type: 'environment', name: 'mobile'})">mobile</button> -->
+
+
+            
         </div>
 
         <div v-if="projects" class="project-index">
@@ -104,7 +111,5 @@
 </template>
 
 <style scoped>
-    .filters {
-        justify-content: space-between;
-    }
+   
 </style>

@@ -7,6 +7,13 @@ SECRET_KEY = "django-insecure-l%u15!x5d_g!z51g$l4mj&_f^+3c8lol7sbc)hl*#)e*^rgz#f
 
 DEBUG = True
 
+USE_L10N = False
+DATETIME_FORMAT = 'd.m.Y - H:i:s'
+USE_TZ = True
+USE_I18N = True
+TIME_ZONE = 'CET'
+LANGUAGE_CODE = 'en-us'
+
 ALLOWED_HOSTS = ["*"]
 CORS_ALLOW_ALL_ORIGINS = True
 CSRF_TRUSTED_ORIGINS = [
@@ -20,12 +27,13 @@ CSRF_TRUSTED_ORIGINS = [
 REST_FRAMEWORK = {
     "DATETIME_FORMAT": "%Y-%m-%dT%H:%M:%S.%f%z",
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
 }
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 INSTALLED_APPS = [
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -60,7 +68,7 @@ ROOT_URLCONF = "core.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "templates"),],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -97,13 +105,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = "en-us"
-
-TIME_ZONE = "UTC"
-
-USE_I18N = True
-
-USE_TZ = True
+# LANGUAGE_CODE = "en-us"
+#
+# TIME_ZONE = "UTC"
+#
+# USE_I18N = True
+#
+# USE_TZ = True
 
 # STATIC_URL = "static/"
 STATIC_URL = "/staticfiles/"
@@ -128,3 +136,14 @@ DJANGORESIZED_DEFAULT_KEEP_META = True
 DJANGORESIZED_DEFAULT_FORCE_FORMAT = "WEBP"
 DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {"WEBP": ".webp"}
 DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
+
+JAZZMIN_SETTINGS = {
+    "site_title": "ourcollaborative.tools",
+    "site_header": "ourcollaborative.tools",
+    "login_logo": None,
+    "topmenu_links": [
+        {"app": "projects"},
+    ],
+    "show_sidebar": True,
+    "navigation_expanded": True,
+}

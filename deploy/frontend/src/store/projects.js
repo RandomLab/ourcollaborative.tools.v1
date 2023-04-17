@@ -74,34 +74,30 @@ export const useProjetStore = defineStore({
         /* tri
         /*--------------------*/
 
-        triAlpha(direction) {
-            if (direction === 'asc') {
-                this.projects.sort((a, b) => {
-                        
-                    if (a.title.toLowerCase() < b.title.toLowerCase()) {
-                        return -1
-                    }
-    
-                    if (a.title.toLowerCase() > b.title.toLowerCase()) {
-                        return 1
-                    }
-                    return 0
-    
-                })
-            } else {
-                this.projects.reverse((a, b) => {
-                        
-                    if (a.title.toLowerCase() < b.title.toLowerCase()) {
-                        return -1
-                    }
-    
-                    if (a.title.toLowerCase() > b.title.toLowerCase()) {
-                        return 1
-                    }
-                    return 0
-    
-                })
-            }
+        triDate() {
+            
+            this.projects.reverse((a, b) => {
+                if (!a.no_date) {
+                    return a.date_creation - b.date_creation
+                }
+            })
+
+        },
+
+        triAlpha() {
+           
+            this.projects.reverse((a, b) => {
+                    
+                if (a.title.toLowerCase() < b.title.toLowerCase()) {
+                    return -1
+                }
+
+                if (a.title.toLowerCase() > b.title.toLowerCase()) {
+                    return 1
+                }
+                return 0
+
+            })
         },
 
         /*--------------------*/

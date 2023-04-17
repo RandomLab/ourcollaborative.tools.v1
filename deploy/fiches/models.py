@@ -10,18 +10,57 @@ from django.db.models.fields import (
 )
 
 from django.template.defaultfilters import slugify
-
 from embed_video.fields import EmbedVideoField
 from django_resized import ResizedImageField
-
 from autoslug import AutoSlugField
+
+
+class Reference(models.Model):
+    """
+    A class to represent a reference in the mediagraphy
+    """
+
+    title = CharField(max_length=250)
+    author = CharField(max_length=250)
+    editor = CharField(max_length=250, blank=True)
+    sub_title = CharField(max_length=250, blank=True)
+    date_pub = DateTimeField("Publication date", default=datetime.datetime(2000, 1, 1))
+    pages = CharField(max_length=50, blank=True)
+    url = URLField(null=True, blank=True)
+    publish = BooleanField(default=True)
+
+    MEDIA_TYPE = (
+        ("book", "Book"),
+        ("article", "Article"),
+        ("thesis", "Thesis"),
+        ("video", "Video"),
+        ("website", "Website"),
+        ("video_game", "Video game"),
+        ("podcast", "Podcast"),
+    )
+
+    media_type = CharField(
+        max_length=15, choices=MEDIA_TYPE, blank=True, default="book"
+    )
+
+    class Meta:
+        """
+        meta
+        """
+
+        ordering = ("title",)
+        verbose_name = "reference"
+        verbose_name_plural = "references"
+
+    def __str__(self) -> str:
+        """return str representation of object"""
+        return f"{self.title}"
 
 
 class Licence(models.Model):
 
     """
     A class to represent a licence.
-
     """
 
     title = CharField(max_length=250)
@@ -58,7 +97,7 @@ class Notion(models.Model):
 
     content = TextField(blank=True)
 
-    publish = BooleanField(default=False)
+    publish = BooleanField(default=True)
 
     slug = AutoSlugField(populate_from="title")
 
@@ -92,7 +131,7 @@ class Article(models.Model):
     content = TextField(blank=True)
 
     # add a text in markdown as a file
-    md_file = models.FileField(upload_to='article', blank=True, null=True)
+    md_file = models.FileField(upload_to="article", blank=True, null=True)
 
     author = models.ForeignKey("Author", on_delete=models.SET_NULL, null=True)
 
@@ -102,10 +141,9 @@ class Article(models.Model):
 
     publish = BooleanField(default=False)
 
-    notion = models.ManyToManyField(
-        Notion,
-        blank=True,
-    )
+    notion = models.ManyToManyField(Notion, blank=True)
+
+    reference = models.ManyToManyField(Reference, blank=True)
 
     licence = models.ForeignKey(
         "Licence", on_delete=models.SET_NULL, null=True, blank=True
@@ -115,7 +153,6 @@ class Article(models.Model):
 
         """
         meta of the article object.
-
         """
 
         ordering = ("title",)
@@ -177,7 +214,12 @@ class Project(models.Model):
 
     url = URLField(null=True, blank=True)
 
-    thumbnail = ResizedImageField(size=[1580, 1000], crop=['middle', 'center'], force_format="WEBP", upload_to='thumb')
+    thumbnail = ResizedImageField(
+        size=[1580, 1000],
+        crop=["middle", "center"],
+        force_format="WEBP",
+        upload_to="thumb",
+    )
 
     date_pub = DateTimeField("Publication date", auto_now_add=True)
 
@@ -204,9 +246,8 @@ class Project(models.Model):
 
     USAGE_TYPE = (
         ("collaboration", "Collaboration"),
-        ("cooperation", "Cooperation"),
         ("contribution", "Contribution"),
-        ("participatory", "Participatory"),
+        ("participation", "Participation"),
     )
 
     usage = CharField(
@@ -217,11 +258,11 @@ class Project(models.Model):
         ("web", "Web"),
         ("desktop", "Desktop"),
         ("mobile", "Mobile"),
+        ("scripting", "Scripting"),
+        ("cli", "Commande Line"),
     )
 
-    environment = CharField(
-        max_length=15, choices=ENV_TYPE, blank=True, default="web"
-    )
+    environment = CharField(max_length=15, choices=ENV_TYPE, blank=True, default="web")
 
     licence = models.ForeignKey(
         "Licence", on_delete=models.SET_NULL, null=True, blank=True
@@ -233,10 +274,8 @@ class Project(models.Model):
     )
 
     class Meta:
-
         """
         meta.
-
         """
 
         ordering = ("title",)
@@ -249,10 +288,8 @@ class Project(models.Model):
 
 
 class ImageProject(models.Model):
-
     """
     A class to represent a project image.
-
     """
 
     legende = models.CharField(max_length=200)
@@ -281,6 +318,8 @@ class Author(models.Model):
     url = URLField(null=True, blank=True)
 
     slug = AutoSlugField(populate_from="name", editable=True)
+
+    publish = BooleanField(default=True)
 
     PRONOUM_TYPE = (
         ("Her", "Her"),

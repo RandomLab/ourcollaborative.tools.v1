@@ -53,10 +53,6 @@
 </template>
 
 <style scoped>
-    
-    svg {   
-        margin-top: 25px;
-    }   
 
     line {
         stroke: var(--second-color);

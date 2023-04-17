@@ -1,21 +1,40 @@
 from django.contrib import admin
+from django.db import models
 from embed_video.admin import AdminVideoMixin
+from .widgets import DateTimePicker
 from .models import (
     Project,
     Author,
     Licence,
     Notion,
     Article,
+    Reference,
     ImageArticle,
     ImageProject,
 )
+
+
+@admin.register(Reference)
+class Reference(admin.ModelAdmin):
+    """
+    A class to represent a reference.
+    """
+
+    list_display = ["title", "publish", "date_pub"]
+    formfield_overrides = {
+        models.DateField: {"widget": DateTimePicker}
+    }
+    # def date_pub(self, obj):
+    #     return obj.date.strftime('%b, %Y')
+    #
+    # date_pub.admin_order_field = 'date'
+    # date_pub.short_description = 'Date'
 
 
 @admin.register(Notion)
 class NotionAdmin(admin.ModelAdmin):
     """
     A class to represent an article.
-
     """
 
     list_display = ["title", "slug", "publish"]
@@ -38,9 +57,9 @@ class AuthorAdmin(admin.ModelAdmin):
 
     """
 
-    list_display = ["name","firstname",  "group", "slug"]
+    list_display = ["name", "firstname", "group", "slug"]
 
-    prepopulated_fields = {"slug": ("name","firstname")}
+    prepopulated_fields = {"slug": ("name", "firstname")}
 
 
 class ImageProjectAdmin(admin.StackedInline):

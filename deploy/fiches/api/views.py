@@ -11,6 +11,7 @@ from fiches.models import (
     Author,
     Notion,
     Licence,
+    Reference,
     ImageProject,
     ImageArticle,
 )
@@ -21,6 +22,7 @@ from fiches.api.serializers import (
     AuthorSerializer,
     NotionSerializer,
     LicenceSerializer,
+    ReferenceSerializer,
     ImageProjectSerializer,
     ImageArticleSerializer,
     ImagesSerializer,
@@ -30,6 +32,7 @@ from fiches.api.serializers import (
 # images
 # ----------------------------
 
+
 class ImagesViewSet(ReadOnlyModelViewSet):
 
     serializer_class = ImagesSerializer
@@ -37,18 +40,18 @@ class ImagesViewSet(ReadOnlyModelViewSet):
     def get_queryset(self):
         return ImageProject.objects
 
+
 # ----------------------------
 # search
 # ----------------------------
+
 
 class SearchNotionView(ListAPIView):
     queryset = Notion.objects.filter(publish=True).order_by("title")
     serializer_class = NotionSerializer
     filter_backends = [SearchFilter, OrderingFilter]
-    search_fields = [
-        "title",
-        "content"
-    ]
+    search_fields = ["title", "content"]
+
 
 class SearchProjectView(ListAPIView):
     queryset = Project.objects.filter(publish=True).order_by("title")
@@ -65,7 +68,7 @@ class SearchProjectView(ListAPIView):
         "notion__title",
         "notion__content",
         "temporality",
-        "usage"
+        "usage",
     ]
 
 
@@ -91,6 +94,19 @@ class SearchProjectView(ListAPIView):
 #         data = projects_serializer.data + articles_serializer.data
 
 # return Response(data)
+
+# ----------------------------
+# references
+# ----------------------------
+
+
+class ReferenceViewSet(ReadOnlyModelViewSet):
+
+    serializer_class = ReferenceSerializer
+    # lookup_field = "slug"
+
+    def get_queryset(self):
+        return Reference.objects.filter(publish=True).order_by("title")
 
 
 # ----------------------------

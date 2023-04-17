@@ -49,3 +49,9 @@
 @import './assets/base.css';
 @import './assets/main.css';
 </style>
+
+<style scoped>
+    #app {
+        height: 100%;
+    }
+</style>
