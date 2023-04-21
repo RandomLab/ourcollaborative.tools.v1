@@ -2,6 +2,8 @@
 
     import { ref, reactive, computed, onMounted } from 'vue'
 
+    import { marked } from 'marked'
+
     import { storeToRefs } from 'pinia'
     import { useNotionStore } from '../store/notions'
 
@@ -95,7 +97,7 @@
                         class="notion--item"
                     >
                         <h2><router-link :to="`notion/${notion.slug}`">{{ notion.title }}</router-link></h2>
-                        <p>{{ notion.content }}</p>
+                        <p v-html="marked.parse(notion.content)"></p>
 
                     </div>
 

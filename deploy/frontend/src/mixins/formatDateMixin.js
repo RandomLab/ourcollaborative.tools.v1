@@ -1,4 +1,4 @@
-export function formatDate(dateString) {
+export function formatDate(dateString, total) {
     if (dateString !== undefined) {
 
         const date = new Date(dateString)
@@ -9,7 +9,10 @@ export function formatDate(dateString) {
         const month = result[2]
         const year = result[4]
 
-        // return `${day.value}.${month.value}.${year.value}`
-        return `${year.value}`
+        if (total) {
+            return `${day.value}.${month.value}.${year.value}`
+        } else {
+            return `${year.value}`
+        }
     }
 }

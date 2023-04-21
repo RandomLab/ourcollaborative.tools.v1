@@ -7,6 +7,9 @@
 <template>
     <footer>
         <RouterLink to="/">Projects</RouterLink>
+        <RouterLink to="/articles">Articles</RouterLink>
+        <RouterLink to="/notions">Notions</RouterLink>
+        <RouterLink to="/authors">Authors</RouterLink>
         <RouterLink to="/search">search</RouterLink>
         <RouterLink to="/about">about</RouterLink>
     </footer>

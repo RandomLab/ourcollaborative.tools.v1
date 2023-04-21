@@ -2,6 +2,8 @@
 
     import { ref, reactive, computed, onMounted, watchEffect } from 'vue'
 
+    import { marked } from 'marked'
+
     import { useRoute } from 'vue-router'
 
     import { storeToRefs } from 'pinia'
@@ -38,7 +40,7 @@
     >
 
         <h1>{{ notion.title }}</h1>
-        <p>{{ notion.content }}</p>
+        <p v-html="marked.parse(notion.content)"></p>
 
         <div class="ref">projets</div>
 

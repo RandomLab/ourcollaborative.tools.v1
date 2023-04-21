@@ -43,9 +43,9 @@
             <h2>description</h2>
             <p>{{ project.description }}</p>
 
-            <svg height="10" width="20">
+            <!-- <svg height="10" width="20">
                 <line x1="0" y1="0" x2="20" y2="0"/>            
-            </svg> 
+            </svg>  -->
         
         </div>
         
@@ -58,4 +58,5 @@
         stroke: var(--second-color);
         stroke-width: 2;
     }
+    
 </style>

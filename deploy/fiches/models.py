@@ -131,7 +131,7 @@ class Article(models.Model):
     content = TextField(blank=True)
 
     # add a text in markdown as a file
-    md_file = models.FileField(upload_to="article", blank=True, null=True)
+    # md_file = models.FileField(upload_to="article", blank=True, null=True)
 
     author = models.ForeignKey("Author", on_delete=models.SET_NULL, null=True)
 
@@ -159,10 +159,10 @@ class Article(models.Model):
         verbose_name = "article"
         verbose_name_plural = "articles"
 
-    def save(self, *args, **kwargs):
-        get_text = self.md_file.open().read()
-        self.content = get_text
-        super(Article, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     get_text = self.md_file.open().read()
+    #     self.content = get_text
+    #     super(Article, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
         """return str representation of object"""

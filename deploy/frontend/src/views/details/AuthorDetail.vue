@@ -2,8 +2,12 @@
 
     import { ref, reactive, computed, onMounted } from 'vue'
 
+    import { useRouter } from 'vue-router'
+
     import { storeToRefs } from 'pinia'
     import { useAuthorStore } from '../../store/authors'
+
+    import Cross from '../../components/utils/Cross.vue'
 
     import AuthorProjects from '../../components/author/AuthorProjects.vue'
 
@@ -15,6 +19,8 @@
         fetchAuthors()
         setAuthor()
     })
+
+    const router = useRouter()
 
     const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
 
@@ -74,6 +80,13 @@
             </div>
 
             <div class="author--right">
+
+                <cross
+                    @click="router.push({ name: 'authors'})" 
+                    width="50" 
+                    height="50"
+                ></cross>
+
                 <author-projects></author-projects>
             </div>
 

@@ -15,6 +15,7 @@ import Header from './components/Header.vue'
 const pinia = createPinia()
 const app = createApp(App)
 
+
 app.component('Header', Header)
 
 app.use(pinia)

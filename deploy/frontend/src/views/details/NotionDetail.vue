@@ -2,10 +2,14 @@
 
     import { ref, reactive, computed, onMounted } from 'vue'
 
+    import { useRouter } from 'vue-router'
+
     import { storeToRefs } from 'pinia'
     import { useNotionStore } from '../../store/notions'
 
     import NotionProjects from '../../components/notion/NotionProjects.vue'
+
+    import Cross from '../../components/utils/Cross.vue'
     
     const { notions, notion, loading, error } = storeToRefs(useNotionStore())
 
@@ -16,6 +20,9 @@
         setNotion()
     })
 
+    const router = useRouter()
+
+    const val = ref('')
 
     const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
 
@@ -26,18 +33,29 @@
         return filterNotion
     }
 
+    function filterAlphabet() {
+        console.log(val.value)
+        return notions.filter((items) => {
+            return item.title.charAt(0).toLowerCase() === val.value
+        })
+    }
+
 </script>
 
 <template>
 
     <main>
         
-        <p v-if="loading">Loading post...</p>
+        <div v-if="loading">Loading post...</div>
         
-        <p v-if="error">{{ error.message }}</p>
+        <div v-if="error">{{ error.message }}</div>
         
         <div class="notion--container">
             <div class="notion--left">
+                <!-- <input 
+                    v-model="val"
+                    @input="filterAlphabet"
+                /> -->
                 <div 
                     v-for="(letter, index) in alphabet"
                     :key="index"
@@ -72,6 +90,12 @@
             <div 
                 class="notion--right"
             >
+                
+                <cross 
+                    @click="router.push({ name: 'notions'})"
+                    width="50" 
+                    height="50"
+                ></cross>
 
                 <notion-projects></notion-projects>
 
