@@ -35,8 +35,13 @@
 
                 <h1><RouterLink :to="`/article/${article.slug}`">{{ article.title }}</RouterLink></h1>
 
-                <h2>{{ article.author.group ? "Collectif" : "Author" }}
-                <RouterLink :to="`/author/${article.author.slug}`">{{ article.author.group ? null : article.author.firstname }} {{ article.author.name }}</RouterLink></h2>
+                <h2>Author(s)</h2>
+                <p
+                    v-for="author in article.author"
+                    :key="author.id"
+                >
+                    <RouterLink :to="`/author/${author.slug}`">{{ author.group ? null : author.firstname }} {{ author.name }}</RouterLink>
+                </p>
 
                 <h2>Resume</h2>
                 <p>{{ article.resume }}</p>

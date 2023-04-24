@@ -70,8 +70,11 @@
 
                 <h1>{{ article.title }}</h1>
 
-                <h2>{{ article.author.group ? "Collectif" : "Author" }}</h2>
-                <h2><span>{{ article.author.group ? null : article.author.firstname }} {{ article.author.name }}</span></h2>
+                <h2>Author(s)</h2>
+                <p
+                    v-for="author in article.author"
+                    :key="author.id"
+                ><RouterLink :to="`/author/${author.slug}`">{{ author.group ? null : author.firstname }} {{ author.name }}</RouterLink></p>
 
                 <h2>Resume</h2>
                 <p>{{ article.resume }}</p>

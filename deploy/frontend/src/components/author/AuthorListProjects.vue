@@ -21,7 +21,7 @@
 </script>
 
 <template>
-    <div v-if="loading">Loading post...</div>
+    <div v-if="loading">Loading projects</div>
 
     <div v-if="error">{{ error.message }}</div>
 
@@ -37,15 +37,17 @@
             
             <h2>project</h2>
             <h1><RouterLink :to="`/project/${project.slug}`">{{ project.title }}</RouterLink></h1>
-            <h2>{{ project.author.group ? "Collectif" : "Author" }}
-            <span>{{ project.author.group ? null : project.author.firstname }} {{ project.author.name }}</span></h2>
+            <h2>Author(s)</h2>
+            <p 
+                v-for="author in project.author"
+                :key="author.id"
+            >{{ author.group ? null : author.firstname }} {{ author.name }}</p>
             <h2>description</h2>
             <p>{{ project.description }}</p>
 
-            <!-- <svg height="10" width="20">
+            <svg height="10" width="20">
                 <line x1="0" y1="0" x2="20" y2="0"/>            
-            </svg>  -->
-        
+            </svg> 
         </div>
 
     </div>

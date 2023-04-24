@@ -4,6 +4,7 @@
 
     import { RouterLink } from 'vue-router'
 
+    import Menu from '../components/utils/Menu.vue'
     import Glyph from '../components/utils/Glyph.vue'
     import Cross from '../components/utils/Cross.vue'
 
@@ -37,10 +38,10 @@
             <RouterLink to="/about">about</RouterLink>
         </nav>
 
-        <glyph 
+        <glyph
             class="navigation_mobile_glyph" 
-            width="40" 
-            height="40"
+            width="50" 
+            height="50"
             @click="handleClick"    
         ></glyph>
 

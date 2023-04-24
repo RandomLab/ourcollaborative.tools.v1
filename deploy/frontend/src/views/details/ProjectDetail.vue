@@ -55,10 +55,17 @@
                             <RouterLink :to="`/year/${formatDate(project.date_creation)}`">{{ formatDate(project.date_creation) }}</RouterLink>
                         </p>
 
-                        <h2>{{ project.author.group ? "Collectif" : "Author" }} </h2>
-                        <p><RouterLink :to="`/author/${project.author.slug}`">
-                            {{ project.author.group ? null : project.author.firstname }} {{ project.author.name }}
-                        </RouterLink></p>
+                        <h2>Author(s)</h2>
+                        <p
+                            v-for="author in project.author"
+                            :key="author.id"
+                        >   
+                            
+                        <RouterLink :to="`/author/${author.slug}`">
+                            {{ author.group ? null : author.firstname }} {{ author.name }}
+                        </RouterLink>
+                        </p>
+
 
                         <h2 v-if="project.url">Link</h2>
                         <p v-if="project.url"><a :href="project.url">{{ cleanURL(project.url) }}</a></p>

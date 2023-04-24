@@ -72,13 +72,14 @@ class ProjectSerializer(ModelSerializer):
 
 class ArticleSerializer(ModelSerializer):
 
-    notion = NotionSerializer(many=True)
-    author = AuthorSerializer()
-    licence = LicenceSerializer()
+    # notion = NotionSerializer(many=True)
+    # author = AuthorSerializer()
+    # licence = LicenceSerializer()
 
     class Meta:
         model = Article
         fields = "__all__"
+        depth = 1
 
 
 class ImagesSerializer(ModelSerializer):

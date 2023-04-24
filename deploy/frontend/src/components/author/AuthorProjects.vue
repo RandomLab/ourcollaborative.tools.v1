@@ -28,13 +28,13 @@
 </script>
 
 <template>
-    <p v-if="loading">Loading post...</p>
-    <p v-if="error">{{ error.message }}</p>
+    <div class="loading" v-if="loading">Loading author</div>
+    <div class="error" v-if="error">{{ error.message }}</div>
     <div
         v-if="author"
         class="author--detail"
     >   
-        <h2>{{ author.group ? "Collectif" : "Author" }} </h2>
+        <h2>{{ author.pronoun }}</h2>
         <h1>{{ author.group ? null : author.firstname }} {{ author.name }}</h1>
 
         <h2 v-if="author.url">Link</h2>

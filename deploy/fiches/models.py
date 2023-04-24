@@ -15,46 +15,49 @@ from django_resized import ResizedImageField
 from autoslug import AutoSlugField
 
 
-class Reference(models.Model):
+class Author(models.Model):
+
     """
-    A class to represent a reference in the mediagraphy
+    A class to represent a author.
+
     """
 
-    title = CharField(max_length=250)
-    author = CharField(max_length=250)
-    editor = CharField(max_length=250, blank=True)
-    sub_title = CharField(max_length=250, blank=True)
-    date_pub = DateTimeField("Publication date", default=datetime.datetime(2000, 1, 1))
-    pages = CharField(max_length=50, blank=True)
+    name = CharField(max_length=250)
+    firstname = CharField(max_length=250, blank=True)
+    group = BooleanField(default=False)
+    bio = TextField(blank=True)
     url = URLField(null=True, blank=True)
+    slug = AutoSlugField(populate_from="name", editable=True)
     publish = BooleanField(default=True)
 
-    MEDIA_TYPE = (
-        ("book", "Book"),
-        ("article", "Article"),
-        ("thesis", "Thesis"),
-        ("video", "Video"),
-        ("website", "Website"),
-        ("video_game", "Video game"),
-        ("podcast", "Podcast"),
+    # TODO: He/him, she/her, they/them
+    PRONOUM_TYPE = (
+        ("he/him", "He/Him"),
+        ("they/them", "They/Them"),
+        ("she/her", "She/Her"),
     )
 
-    media_type = CharField(
-        max_length=15, choices=MEDIA_TYPE, blank=True, default="book"
-    )
+    pronoun = CharField(max_length=10, choices=PRONOUM_TYPE, blank=True, default="Her")
 
     class Meta:
         """
         meta
+
         """
 
-        ordering = ("title",)
-        verbose_name = "reference"
-        verbose_name_plural = "references"
+        ordering = (
+            "name",
+            "group",
+        )
+        verbose_name = "author"
+        verbose_name_plural = "authors"
 
     def __str__(self) -> str:
         """return str representation of object"""
-        return f"{self.title}"
+        if self.group:
+            return f"{self.name}"
+        else:
+            return f"{self.firstname} {self.name}"
 
 
 class Licence(models.Model):
@@ -64,11 +67,8 @@ class Licence(models.Model):
     """
 
     title = CharField(max_length=250)
-
     description = TextField(blank=True)
-
     open = BooleanField(default=True)
-
     slug = AutoSlugField(populate_from="title")
 
     class Meta:
@@ -94,11 +94,8 @@ class Notion(models.Model):
     """
 
     title = CharField(max_length=250)
-
     content = TextField(blank=True)
-
     publish = BooleanField(default=True)
-
     slug = AutoSlugField(populate_from="title")
 
     class Meta:
@@ -117,6 +114,47 @@ class Notion(models.Model):
         return f"{self.title}"
 
 
+class Reference(models.Model):
+    """
+    A class to represent a reference in the mediagraphy
+    """
+    title = CharField(max_length=250)
+    author = CharField(max_length=250)
+    editor = CharField(max_length=250, blank=True)
+    sub_title = CharField(max_length=250, blank=True)
+    date_pub = DateTimeField("Publication date", default=datetime.datetime(2000, 1, 1))
+    pages = CharField(max_length=50, blank=True)
+    url = URLField(null=True, blank=True)
+    notion = models.ManyToManyField(Notion, blank=True)
+    publish = BooleanField(default=True)
+
+    MEDIA_TYPE = (
+        ("book", "Book"),
+        ("article", "Article"),
+        ("thesis", "Thesis"),
+        ("video", "Video"),
+        ("website", "Website"),
+        ("video_game", "Video game"),
+        ("podcast", "Podcast"),
+    )
+
+    media_type = CharField(
+        max_length=15, choices=MEDIA_TYPE, blank=True, default="book"
+    )
+
+    class Meta:
+        """
+        meta
+        """
+        ordering = ("title",)
+        verbose_name = "reference"
+        verbose_name_plural = "references"
+
+    def __str__(self) -> str:
+        """return str representation of object"""
+        return f"{self.title}"
+
+
 class Article(models.Model):
 
     """
@@ -125,26 +163,20 @@ class Article(models.Model):
     """
 
     title = CharField(max_length=250)
-
     resume = TextField(blank=True)
-
     content = TextField(blank=True)
+    original_content = TextField(blank=True)
 
     # add a text in markdown as a file
     # md_file = models.FileField(upload_to="article", blank=True, null=True)
 
-    author = models.ForeignKey("Author", on_delete=models.SET_NULL, null=True)
-
+    # author = models.ForeignKey("Author", on_delete=models.SET_NULL, null=True)
+    author = models.ManyToManyField(Author, blank=True)
     date_pub = DateTimeField("Publication date", auto_now_add=True)
-
     slug = AutoSlugField(populate_from="title")
-
     publish = BooleanField(default=False)
-
     notion = models.ManyToManyField(Notion, blank=True)
-
     reference = models.ManyToManyField(Reference, blank=True)
-
     licence = models.ForeignKey(
         "Licence", on_delete=models.SET_NULL, null=True, blank=True
     )
@@ -183,13 +215,13 @@ class ImageArticle(models.Model):
 
     """
 
-    legende = models.CharField(max_length=200)
+    legend = models.CharField(max_length=200)
     article = models.ForeignKey(Article, default=None, on_delete=CASCADE)
     image = ResizedImageField(force_format="WEBP", upload_to=get_article_image_filename)
 
     def __str__(self) -> str:
         """return str representation of object"""
-        return f"{self.legende}"
+        return f"{self.legend}"
 
 
 def get_img(instance, filename) -> str:
@@ -207,11 +239,11 @@ class Project(models.Model):
     """
 
     title = CharField(max_length=250)
-
     description = TextField(blank=True)
 
-    author = models.ForeignKey("Author", on_delete=models.SET_NULL, null=True)
+    # author = models.ForeignKey("Author", on_delete=models.SET_NULL, null=True)
 
+    author = models.ManyToManyField(Author, blank=True)
     url = URLField(null=True, blank=True)
 
     thumbnail = ResizedImageField(
@@ -228,11 +260,8 @@ class Project(models.Model):
     )
 
     no_date = BooleanField(default=False)
-
     slug = AutoSlugField(populate_from="title")
-
     video = EmbedVideoField(blank=True, null=True)
-
     publish = BooleanField(default=False)
 
     TIME_STATUS = (
@@ -292,59 +321,13 @@ class ImageProject(models.Model):
     A class to represent a project image.
     """
 
-    legende = models.CharField(max_length=200)
+    legend = models.CharField(max_length=200)
     project = models.ForeignKey(Project, default=None, on_delete=CASCADE)
     image = ResizedImageField(force_format="WEBP", upload_to=get_img)
 
     def __str__(self) -> str:
         """return str representation of object"""
-        return f"{self.legende}"
+        return f"{self.legend}"
 
 
-class Author(models.Model):
 
-    """
-    A class to represent a author.
-
-    """
-
-    name = CharField(max_length=250)
-    firstname = CharField(max_length=250, blank=True)
-
-    group = BooleanField(default=False)
-
-    bio = TextField(blank=True)
-
-    url = URLField(null=True, blank=True)
-
-    slug = AutoSlugField(populate_from="name", editable=True)
-
-    publish = BooleanField(default=True)
-
-    PRONOUM_TYPE = (
-        ("Her", "Her"),
-        ("They", "They/Them"),
-        ("Him", "Him"),
-    )
-
-    pronoun = CharField(max_length=10, choices=PRONOUM_TYPE, blank=True, default="Her")
-
-    class Meta:
-        """
-        meta
-
-        """
-
-        ordering = (
-            "name",
-            "group",
-        )
-        verbose_name = "author"
-        verbose_name_plural = "authors"
-
-    def __str__(self) -> str:
-        """return str representation of object"""
-        if self.group:
-            return f"{self.name}"
-        else:
-            return f"{self.firstname} {self.name}"

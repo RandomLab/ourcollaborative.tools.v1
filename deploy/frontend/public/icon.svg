@@ -42,13 +42,14 @@
      inkscape:window-height="796"
      id="namedview22"
      showgrid="false"
-     inkscape:zoom="7.7881555"
-     inkscape:cx="17.906402"
-     inkscape:cy="16.987876"
+     inkscape:zoom="11.006549"
+     inkscape:cx="-1.2212615"
+     inkscape:cy="17.300148"
      inkscape:window-x="1985"
      inkscape:window-y="120"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg20" />
+     inkscape:current-layer="svg20"
+     inkscape:document-rotation="0" />
   <defs
      id="defs14">
     <linearGradient
@@ -86,6 +87,13 @@
          id="stop11" />
     </linearGradient>
   </defs>
+  <rect
+     style="fill:#a0cbe4;stroke-width:151.771;stroke-linecap:square;stroke-linejoin:bevel;paint-order:markers fill stroke;fill-opacity:1"
+     id="rect838"
+     width="252.74088"
+     height="254.84923"
+     x="1.8335108"
+     y="1.4397404" />
   <text
      xml:space="preserve"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:414.597px;line-height:1.25;font-family:'Ready Active';-inkscape-font-specification:'Ready Active';fill:#0b1d23;fill-opacity:1;stroke-width:10.3649;"

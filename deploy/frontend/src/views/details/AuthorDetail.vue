@@ -36,9 +36,9 @@
 <template>
 
     <main>
-        <p v-if="loading">Loading post...</p>
+        <div class="loading" v-if="loading">Loading author</div>
         
-        <p v-if="error">{{ error.message }}</p>
+        <div class="error" v-if="error">{{ error.message }}</div>
 
         <div class="author--container">
             <div class="author--left">

@@ -98,4 +98,4 @@ class ArticleAdmin(admin.ModelAdmin):
     """
 
     inlines = [ImagesArticleAdmin]
-    list_display = ["title", "publish", "author", "slug"]
+    list_display = ["title", "publish", "slug"]
