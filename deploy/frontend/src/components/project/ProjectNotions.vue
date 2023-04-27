@@ -1,5 +1,7 @@
 <script setup>
 
+    import { marked } from 'marked'
+
     const props = defineProps(['notions'])
 
 </script>
@@ -19,7 +21,7 @@
                 class="project-notion--item"
             >
                 <h2><RouterLink :to="`/notion/${notion.slug}`">{{ notion.title }}</RouterLink></h2>
-                <p>{{ notion.content }}</p>
+                <p v-html="marked.parse(notion.content)"></p>
 
             </div>
 

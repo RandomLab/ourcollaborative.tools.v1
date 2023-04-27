@@ -15,8 +15,8 @@
 </script>
 
 <template>
-    <p v-if="loading">Loading post...</p>
-    <p v-if="error">{{ error.message }}</p>
+    <div class="loading" v-if="loading">Loading post...</div>
+    <div class="error" v-if="error">{{ error.message }}</div>
     <ol 
         v-if="images"
         class="project-informations--images">
@@ -26,7 +26,7 @@
             >
                 <div class="ref">image</div>
                 <img :src="image.image" />
-                <figcaption>{{ image.legende }}</figcaption>
+                <figcaption>{{ image.legend }}</figcaption>
 
             </li>
     </ol>

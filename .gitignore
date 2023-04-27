@@ -25,6 +25,7 @@ mediafiles
 staticfiles
 fonts
 venv
+backup
 
 ### OSX ###
 .DS_Store

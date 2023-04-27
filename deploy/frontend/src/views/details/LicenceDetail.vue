@@ -1,12 +1,12 @@
 <script setup>
 
+    import { ref, reactive, computed, onMounted } from 'vue'
+
     import { useRoute } from 'vue-router'
 
     import { storeToRefs } from 'pinia'
     
     import { useLicenceStore } from '../../store/licences'
-
-    // import NotionProjects from '../../components/NotionProjects.vue'
 
     const route = useRoute()
 
@@ -22,13 +22,12 @@
 
     <main>
         
-        <p v-if="loading">Loading post...</p>
+        <div class="loading" v-if="loading">Loading licence</div>
         
-        <p v-if="error">{{ error.message }}</p>
+        <div class="error" v-if="error">{{ error.message }}</div>
         
         <div 
-            v-if="licence"
-            class="licence"
+            class="licence--container"
         >
             <div class="licence-header">
                 <h1>{{ licence.title }}</h1>

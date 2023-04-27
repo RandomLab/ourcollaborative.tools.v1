@@ -161,7 +161,7 @@ class ProjectsByYear(ListAPIView):
         by filtering against a `notion` query parameter in the URL.
         """
         year = self.kwargs["year"]
-        queryset = Project.objects.filter(date_creation__year=year)
+        queryset = Project.objects.filter(publish=True, date_creation__year=year)
         return queryset
 
 
@@ -175,7 +175,7 @@ class ProjectsByNotion(ListAPIView):
         by filtering against a `notion` query parameter in the URL.
         """
         notion_id = self.kwargs["notion_id"]
-        queryset = Project.objects.filter(notion=notion_id)
+        queryset = Project.objects.filter(publish=True, notion=notion_id)
         return queryset
 
 
@@ -189,7 +189,7 @@ class ProjectsByAuthor(ListAPIView):
         by filtering against a `notion` query parameter in the URL.
         """
         author_id = self.kwargs["author_id"]
-        queryset = Project.objects.filter(author=author_id)
+        queryset = Project.objects.filter(publish=True, author=author_id)
         return queryset
 
 
@@ -204,7 +204,7 @@ class ProjectsByUsage(ListAPIView):
         """
         usage_name = self.kwargs["usage_name"]
         print(usage_name)
-        queryset = Project.objects.filter(usage=usage_name)
+        queryset = Project.objects.filter(publish=True, usage=usage_name)
         return queryset
 
 
@@ -218,7 +218,7 @@ class ProjectsByTemporality(ListAPIView):
         by filtering against a `notion` query parameter in the URL.
         """
         temporality_name = self.kwargs["temporality_name"]
-        queryset = Project.objects.filter(temporality=temporality_name)
+        queryset = Project.objects.filter(publish=True, temporality=temporality_name)
         return queryset
 
 
@@ -232,7 +232,7 @@ class ProjectsByEnvironment(ListAPIView):
         by filtering against a `notion` query parameter in the URL.
         """
         environment_name = self.kwargs["environment_name"]
-        queryset = Project.objects.filter(environment=environment_name)
+        queryset = Project.objects.filter(publish=True, environment=environment_name)
         return queryset
 
 
@@ -261,7 +261,7 @@ class AuthorViewSet(ReadOnlyModelViewSet):
     lookup_field = "slug"
 
     def get_queryset(self):
-        return Author.objects
+        return Author.objects.filter(publish=True).order_by("name")
 
 
 # ----------------------------
@@ -285,5 +285,5 @@ class ImageArticleViewSet(ListAPIView):
 
     def get_queryset(self):
         article_id = self.kwargs["article_id"]
-        queryset = ImageArticle.objects.filter(article=article_id)
+        queryset = ImageArticle.objects.filter(publish=True, article=article_id)
         return queryset

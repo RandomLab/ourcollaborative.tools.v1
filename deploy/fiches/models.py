@@ -174,7 +174,7 @@ class Article(models.Model):
     author = models.ManyToManyField(Author, blank=True)
     date_pub = DateTimeField("Publication date", auto_now_add=True)
     slug = AutoSlugField(populate_from="title")
-    publish = BooleanField(default=False)
+    publish = BooleanField(default=True)
     notion = models.ManyToManyField(Notion, blank=True)
     reference = models.ManyToManyField(Reference, blank=True)
     licence = models.ForeignKey(
@@ -262,7 +262,7 @@ class Project(models.Model):
     no_date = BooleanField(default=False)
     slug = AutoSlugField(populate_from="title")
     video = EmbedVideoField(blank=True, null=True)
-    publish = BooleanField(default=False)
+    publish = BooleanField(default=True)
 
     TIME_STATUS = (
         ("event", "Event"),
@@ -275,6 +275,7 @@ class Project(models.Model):
 
     USAGE_TYPE = (
         ("collaboration", "Collaboration"),
+        ("cooperation", "Cooperation"),
         ("contribution", "Contribution"),
         ("participation", "Participation"),
     )

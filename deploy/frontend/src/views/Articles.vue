@@ -2,6 +2,7 @@
 
     import { storeToRefs } from 'pinia'
     import { useArticleStore } from '../store/articles'
+    import { marked } from 'marked'
 
     import { formatDate } from '../mixins/formatDateMixin'
 
@@ -15,9 +16,10 @@
 
 <template>
     <main>
-        <div v-if="loading">loading</div>
-
-        <div v-if="error">{{  error.message }}</div>
+        
+        <div class="loading" v-if="loading">Loading articles</div>
+        
+        <div class="error" v-if="error">{{ error.message }}</div>
 
         <div 
             v-if="articles" 
@@ -29,7 +31,7 @@
                 :key="article.id"
                 class="article--item"
             >   
-                <div class="date">Add on {{ formatDate(article.date_pub, true) }}</div>
+                <div class="date">Added on {{ formatDate(article.date_pub, true) }}</div>
 
                 <h2>article</h2>
 
@@ -44,7 +46,7 @@
                 </p>
 
                 <h2>Resume</h2>
-                <p>{{ article.resume }}</p>
+                <p v-html="marked.parse(article.resume)"></p>
 
                 <svg height="10" width="20">
                     <line x1="0" y1="0" x2="20" y2="0"/>            

@@ -46,16 +46,12 @@
 
     <main>
         
-        <div v-if="loading">Loading post...</div>
+        <div class="loading" v-if="loading">Loading notion</div>
         
-        <div v-if="error">{{ error.message }}</div>
+        <div class="error" v-if="error">{{ error.message }}</div>
         
         <div class="notion--container">
             <div class="notion--left">
-                <!-- <input 
-                    v-model="val"
-                    @input="filterAlphabet"
-                /> -->
                 <div 
                     v-for="(letter, index) in alphabet"
                     :key="index"

@@ -1,8 +1,10 @@
 <script setup>
 
-     import { ref, reactive, computed, onMounted } from 'vue'
-
+    import { ref, reactive, computed, onMounted } from 'vue'
     import { storeToRefs } from 'pinia'
+    import { marked } from 'marked'
+
+
     import { useAuthorStore } from '../store/authors'
 
     const { authors, loading, error } = storeToRefs(useAuthorStore())
@@ -60,10 +62,10 @@
 
 <template>
     <main>
-        <div v-if="loading">loading</div>
 
-        <div v-if="error">{{ error.message }}</div>
-
+        <div class="loading" v-if="loading">Loading authors</div>
+        <div class="error" v-if="error">{{ error.message }}</div>
+        
         <div class="filters">
             <button @click="state = true">ascending</button>
             <button @click="state = false">descending</button>
@@ -93,7 +95,7 @@
                     >
 
                         <h2><RouterLink :to="`/author/${author.slug}`">{{ author.firstname ? author.firstname : null }} {{ author.name }}</RouterLink></h2>
-                        <p>{{ author.bio }}</p>
+                        <p v-html="marked.parse(author.bio)"></p>
 
                     </div>
                 </div>

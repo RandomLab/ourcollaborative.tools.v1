@@ -3,8 +3,6 @@ import {
     createWebHistory
 } from 'vue-router'
 
-// import Home from '../views/Home.vue'
-
 import Projects from '../views/Projects.vue'
 import Project from '../views/details/ProjectDetail.vue'
 
@@ -34,11 +32,6 @@ import Mediagraphy from '../views/Mediagraphy.vue'
 import PageNotFound from '../views/PageNotFound.vue'
 
 const routes = [
-    // {
-    //     path: '/',
-    //     name: 'home',
-    //     component: Home,
-    // },
     {
         path: '/',
         name: 'projects',
@@ -75,6 +68,11 @@ const routes = [
         name: 'notion',
         component: NotionDetail
     },
+    // {
+    //     path: '/licences',
+    //     name: 'licences',
+    //     component: Licences
+    // },
     {
         path: '/licence/:slug',
         name: 'licence',

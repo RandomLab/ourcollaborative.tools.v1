@@ -417,13 +417,25 @@
 
     }
 
-    
-
     & main {
 
         grid-area: main;
         overflow: auto;
         padding-top: 150px;
+
+        & .loading {
+            font-family: var(--font-family-main);
+            color: var(--second-color);
+            font-size: 1rem;
+            font-weight: 300;
+        }
+
+        & .error {
+            font-family: var(--font-family-second);
+            font-size: 1rem;
+            font-weight: 300;
+            color: red;
+        }
 
         & .filters {
             margin-bottom: 20px;
@@ -602,11 +614,11 @@
                   
                     & a {
                         color: var(--main-color);
-                        text-decoration: none;
+                        text-decoration: underline;
                     }
 
                     & :hover {
-                        text-decoration: underline;
+                        text-decoration: none;
                     }
                 }
 
@@ -655,15 +667,14 @@
                     font-size: 1rem;
                     line-height: 1.3rem;
                     font-weight: 300;
-                    /* margin-bottom: 20px; */
 
                     & a {
                         color: var(--main-color);
-                        text-decoration: none;
+                        text-decoration: underline;
                     }
 
                     & :hover {
-                        text-decoration: underline;
+                        text-decoration: none;
                     }
                   
                 }
@@ -864,6 +875,20 @@
                     & h1 {
                         font-size: 3rem;
                     }
+
+                    & .article--content {
+
+                        /* & p {
+                            font-size: 1rem;
+                            line-height: 1.6rem;
+                        } */
+
+                        & blockquote {
+
+                            padding: 0;
+                            
+                        }
+                    }
                 }
             }
             
@@ -929,15 +954,14 @@
                         font-size: 1rem;
                         line-height: 1.3rem;
                         font-weight: 300;
-                        
 
                         & a {
                             color: var(--main-color);
-                            text-decoration: none;
+                            text-decoration: underline;
                         }
 
                         & :hover {
-                            text-decoration: underline;
+                            text-decoration: none;
                         }
                     }         
 
@@ -998,6 +1022,7 @@
                             } */
                         }
 
+
                         & p {
                             font-family: var(--font-family-second);
                             font-weight: 300;
@@ -1005,6 +1030,17 @@
                             font-size: 1rem;
                             line-height: 1.3rem;
                             font-weight: 300;
+
+                            & a {
+                                color: var(--main-color);
+                                text-decoration: underline;
+                            }
+    
+                            & :hover {
+                                text-decoration: none;
+                            }
+    
+
                         }
 
                         & svg {
@@ -1048,6 +1084,7 @@
 
                         & p {
                             width: 100%;
+                          
                         }
 
                         & .ref {
@@ -1104,6 +1141,15 @@
                     font-size: 1rem;
                     line-height: 1.3rem;
                     font-weight: 300;
+                    
+                    & a {
+                        color: var(--main-color);
+                        text-decoration: underline;
+                    }
+    
+                    & :hover {
+                        text-decoration: none;
+                    }
                 }
             }
 
@@ -1489,100 +1535,175 @@
             display: flex;
             flex-direction: column;
 
-            & h1 {
+            & .project--informations {
 
-                font-family: var(--font-family-title);
-                font-size: 5rem;
-                margin-top: 10px;
-                font-weight: 300;
+                & .project-informations--header {
 
-                & a {
-                    text-decoration: none;
-                    color: var(--main-color);
-                }
-
-            }
-
-            & h2 {
-                font-family: var(--font-family-second);
-                text-transform: uppercase;
-                color: var(--second-color);
-                font-size: var(--font-size-small);
-                font-weight: 300;
-                letter-spacing: 2px;
-                margin-bottom: 2px;
-
-            }
-
-            & li {
-                font-family: var(--font-family-main);
-                text-transform: uppercase;
-                font-size: 0.7rem;
-                letter-spacing: 2px;
-                font-weight: 300;
-                padding-bottom: 5px;
-
-                & a {
-                    text-decoration: none;
-                    color: var(--main-color);
-                }
-
-                & :hover {
-                    text-decoration-line: underline;
-                }
-            }
-
-            & p {
-
-                font-family: var(--font-family-main);
-                text-transform: uppercase;
-                font-size: 0.7rem;
-                letter-spacing: 2px;
-                font-weight: 300;
-
-
-                & a {
-                    color: var(--main-color);
-                    text-decoration: none;
-                }
-
-                & :hover {
-                    text-decoration: underline;
-                }
-               
-            }
-
-            & .description {
-                font-family: var(--font-family-second);
-                text-transform: none;
-                font-weight: 300;
-                font-size: var(--font-size-sub);
-                letter-spacing: 0px;
-                line-height: 1.3rem;
-            }
-
-            & .project-informations--details {
-                display: flex;
-                flex-direction: row;
-                margin-bottom: 100px;
-
-                & li {
-                    list-style: none;
+                    & h1 {
+    
+                        font-family: var(--font-family-title);
+                        font-size: 5rem;
+                        margin-top: 10px;
+                        font-weight: 300;
+                        line-height: 4rem;
+        
+                        & a {
+                            text-decoration: none;
+                            color: var(--main-color);
+                        }
+        
+                    }
                 }
 
                 & h2 {
-                    margin-top: 20px;
-                    margin-bottom: 5px;
+                    font-family: var(--font-family-second);
+                    text-transform: uppercase;
+                    color: var(--second-color);
+                    font-size: var(--font-size-small);
+                    font-weight: 300;
+                    letter-spacing: 2px;
+                    margin-bottom: 2px;
+    
                 }
 
-                & .project-informations-details--left {
-                    width: 50%;
-                    padding-right: 50px;
+                & .project-informations--details {
 
-                    & p {
-                        margin-bottom: 5px;
+                    display: flex;
+                    flex-direction: row;
+                    margin-bottom: 100px;
+
+                    & .project-informations-details--right {
+                        
+                        & h2 {
+                            margin-top: 20px;
+                            margin-bottom: 5px;
+                        }
+
+
+                        & p {
+                            margin-bottom: 5px;
+                            font-family: var(--font-family-main);
+                            text-transform: uppercase;
+                            font-size: 0.7rem;
+                            letter-spacing: 2px;
+                            font-weight: 300;
+            
+                            & a {
+                                color: var(--main-color);
+                                text-decoration: none;
+                            }
+                            
+                            & :hover {
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+
+        
+                    & li {
+                        font-family: var(--font-family-main);
+                        text-transform: uppercase;
+                        font-size: 0.7rem;
+                        letter-spacing: 2px;
+                        font-weight: 300;
+                        padding-bottom: 5px;
+                        list-style: none;
+        
+                        & a {
+                            text-decoration: none;
+                            color: var(--main-color);
+                        }
+        
+                        & :hover {
+                            text-decoration-line: underline;
+                        }
+                    }
+
+                    & .project-informations-details--left {
+                        
+                        width: 50%;
+                        padding-right: 50px;
+
+                        & h2 {
+                            margin-top: 20px;
+                            margin-bottom: 5px;
+                        }
+
+                        & p {
+                            margin-bottom: 5px;
+                            font-family: var(--font-family-main);
+                            text-transform: uppercase;
+                            font-size: 0.7rem;
+                            letter-spacing: 2px;
+                            font-weight: 300;
+            
+                            & a {
+                                color: var(--main-color);
+                                text-decoration: none;
+                            }
+                            
+                            & :hover {
+                                text-decoration: underline;
+                            }
+                        }
+
+                        & .description {
+
+                            & :hover {
+                                text-decoration: none;
+                            }
+                        
+                            & p {
+                                font-family: var(--font-family-second);
+                                font-weight: 300;
+                                font-size: var(--font-size-sub);
+                                letter-spacing: 0px;
+                                line-height: 1.5rem;
+                                text-transform: none;
+                               
+                                & a {
+                                    color: var(--main-color);
+                                    text-decoration: underline;
+                                }
+        
+                                & :hover {
+                                    text-decoration: none;
+                                }
+                            }
+                        }
+
                     }
                 }
+    
+
+    
+                /* & .project-informations--details {
+                    display: flex;
+                    flex-direction: row;
+                    margin-bottom: 100px;
+    
+                    & li {
+                        list-style: none;
+                    }
+    
+                    & h2 {
+                        margin-top: 20px;
+                        margin-bottom: 5px;
+                    }
+    
+                    & .project-informations-details--left {
+                        width: 50%;
+                        padding-right: 50px;
+    
+                        & p {
+                            margin-bottom: 5px;
+                        }
+                    }
+
+
+                } */
+
+           
             }
 
             @media screen and (--small-viewport) {
@@ -1625,7 +1746,7 @@
 
                 & li {
 
-                    margin-bottom: 150px;
+                    margin-bottom: 100px;
 
                     & :hover {
                         text-decoration: none;
@@ -1671,7 +1792,7 @@
                 }
             }
 
-            @media screen and (--small-viewport) {
+            /* @media screen and (--small-viewport) {
 
                 & .project-informations--images {
                 
@@ -1679,21 +1800,25 @@
 
                 }
 
-            }
+            } */
 
             @media screen and (--small-viewport) {
                 
                 & .project-informations--images {
 
+                    padding-right: 0px;
+
                     & li {
 
+                        margin-bottom: 10px;
+/* 
                         & .ref {
                             display: none;
-                        }
+                        } */
 
                         & img {
                             width: 100%;
-                            padding-left: 0px;
+                            /* padding-left: 0px; */
                         } 
 
                         
@@ -1759,6 +1884,15 @@
                             text-transform: none;
                             letter-spacing: 0px;
                             line-height: 1.3rem;
+                            
+                            & a {
+                                color: var(--main-color);
+                                text-decoration: underline;
+                            }
+
+                            & :hover {
+                                text-decoration: none;
+                            }
                         }
     
                     }

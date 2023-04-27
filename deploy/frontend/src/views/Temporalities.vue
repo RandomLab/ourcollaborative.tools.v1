@@ -25,9 +25,9 @@
 <template>
     <main>
 
-        <div v-if="loading">loading</div>
-
-        <div v-if="error">{{  error.message }}</div>
+        <div class="loading" v-if="loading">Loading projects</div>
+        
+        <div class="error" v-if="error">{{ error.message }}</div>
 
         
         <div v-if="projects.length" class="project-index">

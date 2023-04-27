@@ -55,9 +55,9 @@
 <template>
 
     <main>
-        <div v-if="loading">Loading post...</div>
         
-        <div v-if="error">{{ error.message }}</div>
+        <div class="loading" v-if="loading">Loading article</div>
+        <div class="error" v-if="error">{{ error.message }}</div>
 
         <div 
             v-if="article"
@@ -77,7 +77,7 @@
                 ><RouterLink :to="`/author/${author.slug}`">{{ author.group ? null : author.firstname }} {{ author.name }}</RouterLink></p>
 
                 <h2>Resume</h2>
-                <p>{{ article.resume }}</p>
+                <p v-html="marked.parse(article.resume)"></p>
 
                 <div 
                     class="article--content"

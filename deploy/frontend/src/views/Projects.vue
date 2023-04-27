@@ -65,9 +65,9 @@
     
       <main>
 
-        <div v-if="loading">loading</div>
-
-        <div v-if="error">{{  error.message }}</div>
+        <div class="loading" v-if="loading">Loading projects</div>
+        
+        <div class="error" v-if="error">{{ error.message }}</div>
 
         <div class="filters">
             <button @click="setState({ type: 'alpha', name: null })">title</button>
@@ -84,9 +84,7 @@
             <button @click="setState({ type: 'environment', name: 'web'})">web</button>
             <button @click="setState({ type: 'environment', name: 'desktop'})">desktop</button>
             <button @click="setState({ type: 'environment', name: 'mobile'})">mobile</button> -->
-
-
-            
+        
         </div>
 
         <div v-if="projects" class="project-index">

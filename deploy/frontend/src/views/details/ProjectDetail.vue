@@ -4,6 +4,7 @@
 
     import { useRoute } from 'vue-router'
     import { storeToRefs } from 'pinia'
+    import { marked } from 'marked'
 
     import { formatDate } from '../../mixins/formatDateMixin'
     import { cleanURL } from '../../mixins/cleanURL'
@@ -30,8 +31,11 @@
 <template>
 
     <main>
-        <div v-if="loading">Loading post...</div>
-        <div v-if="error">{{ error.message }}</div>
+
+        <div class="loading" v-if="loading">Loading project</div>
+        
+        <div class="error" v-if="error">{{ error.message }}</div>
+
         <div v-if="project" class="project">
             
             <div class="project--informations">
@@ -48,7 +52,7 @@
                     <div class="project-informations-details--left">
 
                         <h2>Description</h2>
-                        <p class="description">{{  project.description }}</p>
+                        <p class="description" v-html="marked.parse(project.description)"></p>
                         
                         <h2 v-if="!project.no_date">Creation</h2>
                         <p v-if="!project.no_date">
@@ -91,7 +95,8 @@
                         
                         <h2 v-if="project.licence">Licence</h2>
                         <p v-if="project.licence">
-                            <RouterLink :to="`/licence/${project.licence.slug}`">{{ project.licence.title }}</RouterLink>
+                            {{ project.licence.title }}
+                            <!-- <RouterLink :to="`/licence/${project.licence.slug}`">{{ project.licence.title }}</RouterLink> -->
                         </p>
                         
                         <h2 v-if="project.notion">Notions</h2>

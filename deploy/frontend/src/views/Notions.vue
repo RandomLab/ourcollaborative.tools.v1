@@ -62,7 +62,7 @@
 
 <template>
     <main>
-        <div v-if="loading">loading</div>
+        <div v-if="loading">loading notions</div>
 
         <div v-if="error">{{  error.message }}</div>
 
