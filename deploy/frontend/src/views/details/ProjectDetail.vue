@@ -104,7 +104,12 @@
                             v-for="notion in project.notion"
                             :key="notion.id"
                         >
-                            <RouterLink :to="`/notion/${notion.slug}`">{{ notion.title }}</RouterLink>
+                            <RouterLink 
+                                v-if="notion.publish == true"
+                                :to="`/notion/${notion.slug}`"
+                            >
+                            {{ notion.title }}
+                            </RouterLink>
                         </li>                        
                     </div>
 

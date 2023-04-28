@@ -5,6 +5,9 @@ from rest_framework import routers
 from fiches.api.views import (
     SearchProjectView,
     SearchNotionView,
+    SearchAuthorView,
+    SearchArticleView,
+    # SearchReferenceView,
     ProjectViewSet,
     ArticleViewSet,
     AuthorViewSet,
@@ -46,6 +49,9 @@ reference_router.register("reference", ReferenceViewSet, basename="reference")
 urlpatterns = [
     path("search_projects/", SearchProjectView.as_view()),
     path("search_notions/", SearchNotionView.as_view()),
+    path("search_authors/", SearchAuthorView.as_view()),
+    # path("search_references/", SearchReferenceView.as_view()),
+    path("search_articles/", SearchArticleView.as_view()),
     path("", include(images_router.urls)),
     path("", include(project_router.urls)),
     path("", include(article_router.urls)),

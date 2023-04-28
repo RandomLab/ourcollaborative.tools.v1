@@ -29,6 +29,11 @@ class ReferenceSerializer(ModelSerializer):
         model = Reference
         fields = "__all__"
 
+    # def to_representation(self, instance):
+    #     data = super().to_representation(instance)
+    #     data["type"] = "reference"
+    #     return data
+
 
 class LicenceSerializer(ModelSerializer):
     class Meta:
@@ -40,6 +45,11 @@ class AuthorSerializer(ModelSerializer):
     class Meta:
         model = Author
         fields = "__all__"
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["type"] = "author"
+        return data
 
 
 class NotionSerializer(ModelSerializer):
@@ -80,6 +90,11 @@ class ArticleSerializer(ModelSerializer):
         model = Article
         fields = "__all__"
         depth = 1
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["type"] = "article"
+        return data
 
 
 class ImagesSerializer(ModelSerializer):

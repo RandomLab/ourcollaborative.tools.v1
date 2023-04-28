@@ -45,6 +45,46 @@ class ImagesViewSet(ReadOnlyModelViewSet):
 # search
 # ----------------------------
 
+# class SearchReferenceView(ListAPIView):
+#     queryset = Reference.objects.filter(publish=True).order_by("title")
+#     serializer_class = ReferenceSerializer
+#     filter_backends = [SearchFilter, OrderingFilter]
+#     search_fields = [
+#         "title",
+#         "author",
+#         "editor",
+#         "sub_title",
+#         "date_pub",
+#         "pages",
+#         "url",
+#         "notion__title",
+#         "notion__content",
+#         "media_type"
+#     ]
+
+
+class SearchAuthorView(ListAPIView):
+    queryset = Author.objects.filter(publish=True).order_by("name")
+    serializer_class = AuthorSerializer
+    filter_backends = [SearchFilter, OrderingFilter]
+    search_fields = ["name", "firstname", "bio", "pronoun"]
+
+
+class SearchArticleView(ListAPIView):
+    queryset = Article.objects.filter(publish=True).order_by("title")
+    serializer_class = ArticleSerializer
+    filter_backends = [SearchFilter, OrderingFilter]
+    search_fields = [
+        "title",
+        "resume",
+        "content",
+        "notion__title",
+        "notion__content",
+        "author__name",
+        "author__firstname",
+        "reference__title",
+    ]
+
 
 class SearchNotionView(ListAPIView):
     queryset = Notion.objects.filter(publish=True).order_by("title")

@@ -36,11 +36,11 @@
             
             <h2>project</h2>
             <h1><RouterLink :to="`/project/${project.slug}`">{{ project.title }}</RouterLink></h1>
-            <h2>Author(s)</h2>
+            <!-- <h2>Author(s)</h2>
             <p 
                 v-for="author in project.author"
                 :key="author.id"
-            >{{ author.group ? null : author.firstname }} {{ author.name }}</p>
+            >{{ author.group ? null : author.firstname }} {{ author.name }}</p> -->
             <h2>description</h2>
             <p v-html="marked.parse(project.description)"></p>
 

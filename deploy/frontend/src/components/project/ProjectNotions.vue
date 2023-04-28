@@ -20,8 +20,8 @@
                 :key="notion.id"
                 class="project-notion--item"
             >
-                <h2><RouterLink :to="`/notion/${notion.slug}`">{{ notion.title }}</RouterLink></h2>
-                <p v-html="marked.parse(notion.content)"></p>
+                <h2 v-if="notion.publish"><RouterLink :to="`/notion/${notion.slug}`">{{ notion.title }}</RouterLink></h2>
+                <p v-if="notion.publish" v-html="marked.parse(notion.content)"></p>
 
             </div>
 

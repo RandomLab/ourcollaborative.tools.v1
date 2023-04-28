@@ -1,10 +1,9 @@
 <script setup>
 
     import  { onMounted, computed } from 'vue'
-
     import { useRoute } from 'vue-router'
-   
     import { storeToRefs } from 'pinia'
+    import { marked } from 'marked'
     
     import { useProjetStore } from '../../store/projects'
     
@@ -21,8 +20,8 @@
 </script>
 
 <template>
-    <p v-if="loading">Loading post...</p>
-    <p v-if="error">{{ error.message }}</p>
+    <div class="loading" v-if="loading">Loading post...</div>
+    <div class="error" v-if="error">{{ error.message }}</div>
 
     <div 
       v-if="projects.length > 0"
@@ -42,9 +41,9 @@
             <p 
                 v-for="author in project.author"
                 :key="author.id"
-            >{{ author.group ? null : author.firstname }} {{ author.name }}</p>
+            ><RouterLink :to="`/author/${author.slug}`">{{ author.group ? null : author.firstname }} {{ author.name }}</RouterLink></p>
             <h2>description</h2>
-            <p>{{ project.description }}</p>
+            <p v-html="marked.parse(project.description)"></p>
 
             <svg height="10" width="20">
                 <line x1="0" y1="0" x2="20" y2="0"/>            

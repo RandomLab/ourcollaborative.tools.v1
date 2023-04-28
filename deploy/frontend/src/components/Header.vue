@@ -35,6 +35,7 @@
             <RouterLink to="/notions">Notions</RouterLink>
             <RouterLink to="/authors">Authors</RouterLink>
             <RouterLink to="/mediagraphy">Media</RouterLink>
+            <RouterLink to="/search">Search</RouterLink>
             <RouterLink to="/about">about</RouterLink>
         </nav>
 
