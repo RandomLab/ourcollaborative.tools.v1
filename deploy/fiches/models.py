@@ -239,6 +239,7 @@ class Project(models.Model):
     """
 
     title = CharField(max_length=250)
+    short_description = CharField(max_length=300, blank=True)
     description = TextField(blank=True)
 
     # author = models.ForeignKey("Author", on_delete=models.SET_NULL, null=True)

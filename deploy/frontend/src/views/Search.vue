@@ -7,9 +7,9 @@
 
     import Results from '../components/Results.vue'
 
-    const { notions, projects, authors, references, loading, error } = storeToRefs(useSearchStore())
+    const { results, loading, error } = storeToRefs(useSearchStore())
 
-    const { fetchSearch } = useSearchStore()
+    const { fetchSearch, mergeData } = useSearchStore()
 
     const search = reactive({
         word: '',
@@ -17,6 +17,7 @@
 
     function launchSearch() {
         fetchSearch(search.word)
+        mergeData
         search.word = ''
     }
 
@@ -41,7 +42,7 @@
                 placeholder="Search through all"
                 v-model="search.word"
             >
-            <button @click="launchSearch">GO</button>
+            <button @click="launchSearch">go</button>
         </div>
 
         <div class="loading" v-if="loading">loading</div>
@@ -50,53 +51,21 @@
         <!-- notions -->
 
         <div 
-            v-if="notions.length > 0" 
+            v-if="results.length > 0" 
             class="search-results"
         >
 
             <div
-                v-for="notion in notions"
-                :key="notion.id"
+                v-for="result in results"
+                :key="result.id"
             >
-                <results :result="notion"></results>
+                <results :result="result"></results>
 
             </div>
 
         </div>
 
-        <!-- project -->
-
-        <div 
-            v-if="projects.length > 0" 
-            class="search-results"
-        >
-
-            <div
-                v-for="project in projects"
-                :key="project.id"
-            >
-                <results :result="project"></results>
-
-            </div>
-
-        </div>
-
-        <!-- author -->
-
-        <div 
-            v-if="authors.length > 0" 
-            class="search-results"
-        >
-
-            <div
-                v-for="author in authors"
-                :key="author.id"
-            >
-                <results :result="author"></results>
-
-            </div>
-
-        </div>
+        
 
 
         <div v-else class="no-result">no results</div>

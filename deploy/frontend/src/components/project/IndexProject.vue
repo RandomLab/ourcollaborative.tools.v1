@@ -4,7 +4,7 @@
     import { useRouter, useRoute } from 'vue-router'
     import { marked } from 'marked'
    
-    import Icon from '../../components/utils/Glyph.vue'
+    import Icon from '../../components/utils/Flower.vue'
     
     const router = useRouter()
 
@@ -45,7 +45,7 @@
                 {{ author.group ? null : author.firstname }} {{ author.name }}
             </h3>
             <h1>{{ project.title }}</h1>
-            <p class="description" v-html="marked.parse(project.description)"></p>
+            <p class="description" v-html="marked.parse(project.short_description ? project.short_description : project.description)"></p>
         </div>
 
     </div>

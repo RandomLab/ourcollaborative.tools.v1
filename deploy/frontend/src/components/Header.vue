@@ -4,7 +4,6 @@
 
     import { RouterLink } from 'vue-router'
 
-    import Menu from '../components/utils/Menu.vue'
     import Glyph from '../components/utils/Glyph.vue'
     import Cross from '../components/utils/Cross.vue'
 

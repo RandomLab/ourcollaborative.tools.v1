@@ -9,10 +9,15 @@ export const useSearchStore = defineStore({
         notions: [],
         projects: [],
         authors: [],
+        results: [],
         loading: false,
         error: null
     }),
-
+    getters: {
+        mergeData(state) {
+            return state.results = [...state.notions, ...state.authors, ...state.projects]
+        }
+    },
     actions: {
         async fetchNotions(words) {
             this.notions = []
