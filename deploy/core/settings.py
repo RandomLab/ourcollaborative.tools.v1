@@ -22,6 +22,7 @@ CSRF_TRUSTED_ORIGINS = [
     "https://dev.ourcollaborative.tools",
     "https://admin.ourcollaborative.tools",
     "https://api.ourcollaborative.tools",
+    "http://localhost"
 ]
 
 REST_FRAMEWORK = {

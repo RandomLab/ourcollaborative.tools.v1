@@ -32,7 +32,7 @@ body {
 [theme="light"] {
     --main-color: #422F4B;
     --main-background-color: #EBE8F1;
-    --second-color: #B25A38;
+    --second-color: #914325;
     color: var(--main-color);
     background-color: var(--main-background-color);
 }

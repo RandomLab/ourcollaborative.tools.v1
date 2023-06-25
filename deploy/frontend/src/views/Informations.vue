@@ -1,7 +1,11 @@
 <script setup>
 
+    import { marked } from 'marked'
     import { storeToRefs } from 'pinia'
+
     import { useInformationsStore } from '../store/informations'
+
+    import Logos from '../components/utils/Logos.vue'
 
     const { informations, loading, error } = storeToRefs(useInformationsStore())
 
@@ -17,16 +21,21 @@
 
         <div v-if="error">{{  error.message }}</div>
 
-        <div v-if="informations" class="index">
+        <div v-if="informations" class="information">
             <li 
                 v-for="information in informations"
                 :key="information.id"
             >   
                 <h1>{{ information.title }}</h1>
-                <p>{{ information.text }}</p>
+                <p v-html="marked.parse(information.text)"></p>
 
             </li>
-        </div>
 
+
+        </div>
+    <logos
+        width="900" 
+        height="190"
+    ></logos>
     </main>
 </template>

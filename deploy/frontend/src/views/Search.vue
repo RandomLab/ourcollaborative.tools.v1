@@ -51,7 +51,7 @@
         <!-- notions -->
 
         <div 
-            v-if="results.length > 0" 
+            v-if="results" 
             class="search-results"
         >
 

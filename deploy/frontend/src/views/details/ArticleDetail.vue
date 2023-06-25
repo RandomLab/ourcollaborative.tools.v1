@@ -66,36 +66,41 @@
 
             <div class="article--detail">
 
-                 <h2>article</h2>
+                <div class="article--text">
 
-                <h1>{{ article.title }}</h1>
+                    <h2>article</h2>
 
-                <h2>Author(s)</h2>
-                <p
-                    v-for="author in article.author"
-                    :key="author.id"
-                ><RouterLink :to="`/author/${author.slug}`">{{ author.group ? null : author.firstname }} {{ author.name }}</RouterLink></p>
+                    <h1>{{ article.title }}</h1>
 
-                <h2>Resume</h2>
-                <p v-html="marked.parse(article.resume)"></p>
+                    <h2>Author(s)</h2>
+                    <p
+                        v-for="author in article.author"
+                        :key="author.id"
+                    ><RouterLink :to="`/author/${author.slug}`">{{ author.group ? null : author.firstname }} {{ author.name }}</RouterLink></p>
 
-                <div 
-                    class="article--content"
-                    v-html="marked.parse(article.content)"
-                >
+                    <h2>Resume</h2>
+                    <p v-html="marked.parse(article.resume)"></p>
+
+                    <div 
+                        class="article--content"
+                        v-html="marked.parse(article.content)"
+                    >
+                    </div>
+
+                </div>
+
+                <div class="article--notions">
+                    <li 
+                        v-for="notion in article.notion"
+                        :key="notion.id"
+                    >
+                        <h2><RouterLink :to="`/notion/${notion.slug}`">{{ notion.title }}</RouterLink></h2>
+                        <p v-html="marked.parse(notion.content)"></p>
+                    </li>
                 </div>
             
             </div>
 
-            <div class="article--notions">
-                <li 
-                    v-for="notion in article.notion"
-                    :key="notion.id"
-                >
-                    <h2><RouterLink :to="`/notion/${notion.slug}`">{{ notion.title }}</RouterLink></h2>
-                    <p v-html="marked.parse(notion.content)"></p>
-                </li>
-            </div>
         </div>
     </main>
 

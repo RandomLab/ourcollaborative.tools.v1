@@ -37,7 +37,7 @@
 
         <!-- auteur -->
 
-        <h1 v-if="result.type === 'author'"><RouterLink :to="`/author/${result.slug}`">{{ result.group ? null : result.firstname  }}{{ result.name }}</RouterLink></h1>
+        <h1 v-if="result.type === 'author'"><RouterLink :to="`/author/${result.slug}`">{{ result.group ? null : result.firstname  }} {{ result.name }}</RouterLink></h1>
 
         <h2 v-if="result.type === 'author'">biography</h2>
         

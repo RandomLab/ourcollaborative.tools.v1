@@ -17,6 +17,8 @@
     padding-left: var(--padding-size-main);
     padding-right: var(--padding-size-main);
 
+
+
     & .search-index {
 
         & input {
@@ -581,6 +583,8 @@
             }
         }
 
+
+
         & .reference--container {
             display: flex;
             flex-direction: column;
@@ -647,10 +651,46 @@
 
         }
 
+        & .information {
+
+            & h1 {
+                font-family: var(--font-family-title);
+                font-size: 5rem;
+                margin-top: 10px;
+                font-weight: 300;
+                color: var(--main-color);
+                padding-bottom: 20px;
+            }
+
+            & p {
+                font-family: var(--font-family-second);
+                font-weight: 300;
+                width: 80%;
+                margin-top: 10px;
+                margin-bottom: 20px;
+                font-size: 1.3rem;
+                line-height: 1.8rem;
+
+                & em {
+                    font-style: italic;
+                }
+              
+                & a {
+                    color: var(--main-color);
+                    text-decoration: underline;
+                }
+
+                & :hover {
+                    text-decoration: none;
+                }
+            }
+        }
+
         & .article--container {
 
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
+            overflow: hidden;
 
             & .article--item {
                 padding-left: 60px;
@@ -734,170 +774,186 @@
 
             & .article--detail {
 
-                width: 70%;
-                
-                & h1 {
-                    font-family: var(--font-family-title);
-                    font-size: 5rem;
-                    margin-top: 10px;
-                    font-weight: 300;
-                    color: var(--main-color);
-                    padding-bottom: 20px;
-                }
+                /* width: 70%; */
+                display: flex;
+                flex-direction: row;
 
-                & h2 {
-                    font-family: var(--font-family-second);
-                    margin-top: 10px;
-                    font-size: 0.6rem;
-                    text-transform:uppercase;
-                    color: var(--second-color);
-                    letter-spacing: 2px;
-                    margin-bottom: 5px;
+                & .article--text {
 
-                    & span {
-                        font-family: var(--font-family-main);
-                        color: var(--main-color);
-                    }
-                }
+                    width: 70%;
 
-                & p {
-                    font-family: var(--font-family-second);
-                    font-weight: 300;
-                    font-size: 1rem;
-                    line-height: 1.3rem;
-                    font-weight: 300;
-
-                    & em {
-                        font-style: italic;
-                    }
-
-                    & a {
-                        color: var(--main-color);
-                        text-decoration: underline;
-                    }
-
-                    & :hover {
-                        text-decoration: none;
-                    }
-                  
-                }
-
-                & .article--content {
-
-
-                    & h2 {
-                        font-size: 1.3rem;
-                        margin-bottom: 0;
-                        margin-top: 50px;
-                        text-transform:none;
-                    }
-
-                    & p {
-
+                    & h1 {
+                        font-family: var(--font-family-title);
+                        font-size: 5rem;
                         margin-top: 10px;
-                        margin-bottom: 20px;
-                        font-size: 1.3rem;
-                        line-height: 1.8rem;
-
+                        font-weight: 300;
+                        color: var(--main-color);
+                        padding-bottom: 20px;
+                    }
+    
+                    & h2 {
+                        font-family: var(--font-family-second);
+                        margin-top: 10px;
+                        font-size: 0.6rem;
+                        text-transform:uppercase;
+                        color: var(--second-color);
+                        letter-spacing: 2px;
+                        margin-bottom: 5px;
+    
+                        & span {
+                            font-family: var(--font-family-main);
+                            color: var(--main-color);
+                        }
+                    }
+    
+                    & p {
+                        font-family: var(--font-family-second);
+                        font-weight: 300;
+                        font-size: 1rem;
+                        line-height: 1.3rem;
+                        font-weight: 300;
+    
                         & em {
                             font-style: italic;
                         }
-
-                        & sup {
-
-                            vertical-align: super;
     
-                            font-family: var(--font-family-main);
-                            font-size: 0.8rem;
-                            
-                            & a {
-                                color: var(--second-color);
-                                text-decoration: none;
-                            }
-
-                            padding-left: 2px;
-                        }
-
-
-                        
-                    }
-
-                    & li {
-
-                        list-style: inside;
-                        list-style-type: decimal;
-                        font-family: var(--font-family-main);
-                        font-size: 0.8rem;
-                        margin-top: 10px;
-                        color: var(--second-color);
-
-                        & p {
-                            font-family: var(--font-family-second);
-                            font-size: 1rem;
-                            line-height: 1.3rem;
-                            padding: 0;
-                            margin: 0;
+                        & a {
                             color: var(--main-color);
-
+                            text-decoration: underline;
+                        }
+    
+                        & :hover {
+                            text-decoration: none;
+                        }
+                      
+                    }
+    
+                    & .article--content {
+    
+    
+                        & h2 {
+                            font-size: 1.3rem;
+                            margin-bottom: 0;
+                            margin-top: 50px;
+                            text-transform:none;
+                        }
+    
+                        & p {
+    
+                            margin-top: 10px;
+                            margin-bottom: 20px;
+                            font-size: 1.3rem;
+                            line-height: 1.8rem;
+    
                             & em {
                                 font-style: italic;
                             }
+    
+                            & sup {
+    
+                                vertical-align: super;
+        
+                                font-family: var(--font-family-main);
+                                font-size: 0.8rem;
+                                
+                                & a {
+                                    color: var(--second-color);
+                                    text-decoration: none;
+                                }
+    
+                                padding-left: 2px;
+                            }
+    
+    
+                            
+                        }
+    
+                        & li {
+    
+                            list-style: inside;
+                            list-style-type: decimal;
+                            font-family: var(--font-family-main);
+                            font-size: 0.8rem;
+                            margin-top: 10px;
+                            color: var(--second-color);
+                            line-height: 1.3rem;
+                            width: 60%;
 
                             & a {
                                 color: var(--second-color);
                                 padding-left: 5px;
                                 text-decoration: none;
                             }
+    
+                            & p {
+                                font-family: var(--font-family-second);
+                                font-size: 1rem;
+                                line-height: 1.3rem;
+                                padding: 0;
+                                margin: 0;
+                                color: var(--main-color);
+    
+                                & em {
+                                    font-style: italic;
+                                }
+    
+                                & a {
+                                    color: var(--second-color);
+                                    padding-left: 5px;
+                                    text-decoration: none;
+                                }
+                            }
+                           
                         }
-                       
-                    }
-
-                    
-
-                    & blockquote {
-                        color: var(--second-color);
-                        padding-left: 50px;
-                        padding-right: 80px;
-                    }
-
-                    & .ref {
-                        position: absolute;
-                        font-family: var(--font-family-title);
-                        font-size: 1rem;
-                        font-weight: 600;
-                        transform: rotate(90deg);
-                        width: 100px;
-                        padding-top: 90px;
-
-                        & span {
-                            font-family: var(--font-family-main);
-                            font-weight: 400;
-                            font-size: 0.7rem;
+    
+                        
+    
+                        & blockquote {
                             color: var(--second-color);
+                            padding-left: 50px;
+                            padding-right: 80px;
                         }
+    
+                        & .ref {
+                            position: absolute;
+                            font-family: var(--font-family-title);
+                            font-size: 1rem;
+                            font-weight: 600;
+                            transform: rotate(90deg);
+                            width: 100px;
+                            padding-top: 90px;
+    
+                            & span {
+                                font-family: var(--font-family-main);
+                                font-weight: 400;
+                                font-size: 0.7rem;
+                                color: var(--second-color);
+                            }
+                        }
+        
+                        & figcaption {
+                            font-family: var(--font-family-second);
+                            text-transform: none;
+                            font-weight: 300;
+                            font-size: var(--font-size-sub);
+                            letter-spacing: 0px;
+                            line-height: 1.3rem;
+                            color: var(--second-color);
+                            margin-bottom: 50px;
+                            width: 100%;
+                            padding-left: 80%;
+                        }
+                        
+        
+                        & img {
+                            width: 100%;
+                            padding-left: 30px;
+                        } 
                     }
     
-                    & figcaption {
-                        font-family: var(--font-family-second);
-                        text-transform: none;
-                        font-weight: 300;
-                        font-size: var(--font-size-sub);
-                        letter-spacing: 0px;
-                        line-height: 1.3rem;
-                        color: var(--second-color);
-                        margin-bottom: 50px;
-                        width: 100%;
-                        padding-left: 80%;
-                    }
-                    
-    
-                    & img {
-                        width: 100%;
-                        padding-left: 30px;
-                    } 
                 }
-
             }
+                
 
             & .article--notions {
 
@@ -939,6 +995,11 @@
                         & em {
                             font-style: italic;
                         }
+
+                        & a {
+                            text-decoration: underline;
+                            color: var(--main-color);
+                        }
                     }
 
                 }
@@ -954,13 +1015,20 @@
                 flex-direction: column;
 
                 & .article--detail {
-                    width: 100%;
+                    flex-direction: column;
+                    /* width: 100%; */
+
+                    & .article--text {
+                        width: 100%;
+                    }
+
+                    & .article--notions {
+                        margin-top: 50px;
+                        width: 100%;
+                    }
+
                 }
 
-                & .article--notions {
-                    margin-top: 50px;
-                    width: 100%;
-                }
             
             }
 
