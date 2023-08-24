@@ -28,7 +28,7 @@
     >
 
         <img
-            :src="project.thumbnail"
+            v-lazy="project.thumbnail"
             :class="hover ? 'hide' : 'show'"
         />
 

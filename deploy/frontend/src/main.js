@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import VueLazyload from 'vue-lazyload'
 
 import axios from 'axios'
 
@@ -21,5 +22,7 @@ app.component('Header', Header)
 app.use(pinia)
 
 app.use(router)
+
+app.use(VueLazyload)
     
 app.mount('#app')

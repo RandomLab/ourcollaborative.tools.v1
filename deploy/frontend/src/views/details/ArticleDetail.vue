@@ -78,9 +78,6 @@
                         :key="author.id"
                     ><RouterLink :to="`/author/${author.slug}`">{{ author.group ? null : author.firstname }} {{ author.name }}</RouterLink></p>
 
-                    <h2>Resume</h2>
-                    <p v-html="marked.parse(article.resume)"></p>
-
                     <div 
                         class="article--content"
                         v-html="marked.parse(article.content)"

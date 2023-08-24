@@ -25,7 +25,7 @@
                 :key="image.id"
             >
                 <div class="ref">image</div>
-                <img :src="image.image" />
+                <img v-lazy="image.image" />
                 <figcaption>{{ image.legend }}</figcaption>
 
             </li>

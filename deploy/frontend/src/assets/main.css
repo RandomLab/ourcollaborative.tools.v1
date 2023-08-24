@@ -867,11 +867,21 @@
     
                             
                         }
+
+                        & .article-notes {
+
+
+                            & li {
+                                list-style-type: decimal;
+                            }
+                            
+
+                        }
     
                         & li {
     
                             list-style: inside;
-                            list-style-type: decimal;
+                            /* list-style-type: decimal; */
                             font-family: var(--font-family-main);
                             font-size: 0.8rem;
                             margin-top: 10px;
